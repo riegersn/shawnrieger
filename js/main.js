@@ -1,14 +1,13 @@
 
 function main() {
-  $(window).scroll(function() {
-    var docViewTop = $(window).scrollTop();
-    var docViewBottom = docViewTop + $(window).height();
-    var elemTop = $('.me-background').offset().top;
+  var profileImg = $('.about.img-header');
+  var profileImgBottom = profileImg.offset().top + profileImg.height() - 100;
 
-    if ((elemTop <= docViewBottom) && (elemTop >= docViewTop)) {
-      var imgPos = docViewTop / 2;
-      $('.me-background').css('background-position', '50% ' + imgPos +'%');
-    }
+  $(window).scroll(function() {
+    var docTop = $(window).scrollTop();
+    var newPos = docTop / 4.5;
+    if (profileImgBottom >= docTop && newPos <= 100)
+      profileImg.css('background-position', '50% ' + newPos +'%');
   });
 }
 
