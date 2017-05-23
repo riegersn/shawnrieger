@@ -1,0 +1,26 @@
+{
+  "name": "shawnrieger",
+  "version": "1.0.0",
+  "description": "My personal website",
+  "main": "index.html",
+  "repository": "https://github.com/riegersn/shawnrieger",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Shawn Rieger <riegersn@gmail.com> (http://shawnrieger.com/)",
+  "license": "GPL-3.0",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "eslint": "^3.17.1",
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-eslint": "^3.0.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^2.1.0",
+    "jshint": "^2.9.4"
+  }
+}
