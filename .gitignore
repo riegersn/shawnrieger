@@ -37,3 +37,4 @@ dist/
 js/*.pkgd.*
 js/*.min.*
 *.css
+notes
