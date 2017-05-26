@@ -1,6 +1,7 @@
 
 function main() {
 
+  // monitor scroll for parallax
   $(window).scroll(function() {
     var scrollTop = window.pageYOffset;
     console.log('scroll-top', scrollTop);
