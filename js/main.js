@@ -1,4 +1,5 @@
-
+// max number of photographs available
+var numberOfPhotographs = 20;
 
 /**
  * photography lightbox
@@ -78,7 +79,7 @@ function quickPad(i) {
 function getPhotos(){
   var photos = '';
   var cnt = $('.photo-group .grid-item').length;
-  for (var i = cnt+1; i < cnt+7; i++) {
+  for (var i = cnt+1; i < cnt+7 && i < (numberOfPhotographs+1); i++) {
     // TODO: stop when no photos are left
     photos += '<div class="grid-item grid-sizer"><img src="img/photography/photography_' + quickPad(i) + '.jpg"></div>';
   }
