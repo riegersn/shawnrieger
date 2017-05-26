@@ -22,6 +22,13 @@ $lightbox.click(function(){
   }, 250);
 });
 
+// scrollTo - little helper function
+var scrollTo = function($object) {
+  $('html,body').animate({
+    scrollTop: $object.offset().top - 80
+  }, 1000);
+};
+
 function main() {
 
   // monitor scroll for parallax
@@ -59,9 +66,7 @@ function main() {
       $msnry.masonry( 'appended', $item );
       if (!scrollOnce) {
         scrollOnce = true;
-        $('html,body').animate({
-          scrollTop: $item.offset().top - 75
-        }, 1000);
+        scrollTo($item);
       }
     });
   });
@@ -87,12 +92,10 @@ function getPhotos(){
 }
 
 // smooth scroll from navigation
-$('nav a').click(function(evt){
+$('nav button').click(function(evt){
   evt.preventDefault();
-  var id = $(this).attr('href');
-  $('html,body').animate({
-    scrollTop: $(id).offset().top - 75
-  }, 1000);
+  var $section = $('#' + $(this).data('section'));
+  scrollTo($section);
 });
 
 // load parallax elements
