@@ -11,7 +11,12 @@ function main() {
     });
   });
 
-  $('.parallax-mouse').mousemove(function(evt){
+  // fire up the masonry grid
+  var $msnry = $('.photo-group').masonry({
+    itemSelector: '.grid-item',
+    columnWidth: '.grid-sizer',
+    percentPosition: true
+  });
 
     var x = ((evt.pageX - $(this).offset().left) / $(this).width()) * 100;
     var y = ((evt.pageY - $(this).offset().top) / $(this).height()) * 100;
