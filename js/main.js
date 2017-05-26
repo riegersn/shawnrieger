@@ -18,9 +18,23 @@ function main() {
     percentPosition: true
   });
 
-    var x = ((evt.pageX - $(this).offset().left) / $(this).width()) * 100;
-    var y = ((evt.pageY - $(this).offset().top) / $(this).height()) * 100;
-    $(this).css('background-position', x+'% ' + y+'%');
+  // handle load photos btn
+  $('.load-photos').click(function(){
+    var $photos = getPhotos();
+    $photos.hide();
+    $msnry.append($photos);
+    var scrollOnce = false;
+    $photos.imagesLoaded().progress( function( imgLoad, image ) {
+      var $item = $( image.img ).parents('.grid-item');
+      $item.show();
+      $msnry.masonry( 'appended', $item );
+      if (!scrollOnce) {
+        scrollOnce = true;
+        $('html,body').animate({
+          scrollTop: $item.offset().top - 75
+        }, 1000);
+      }
+    });
   });
 
 }
