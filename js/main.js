@@ -1,4 +1,26 @@
 
+
+/**
+ * photography lightbox
+ */
+var $lightbox = $('#lightbox');
+var $lightboxImg = $('#lightbox img');
+
+$('.photo-group img').click(function(){
+  var src = $(this).attr('src');
+  $lightboxImg.attr('src', src);
+  $lightbox.show(0, function(){
+    $lightbox.css({opacity: 1});
+  });
+});
+
+$lightbox.click(function(){
+  $lightbox.css({opacity: 0});
+  setTimeout(function(){
+    $lightbox.hide();
+  }, 250);
+});
+
 function main() {
 
   // monitor scroll for parallax
@@ -25,6 +47,13 @@ function main() {
     var scrollOnce = false;
     $photos.imagesLoaded().progress( function( imgLoad, image ) {
       var $item = $( image.img ).parents('.grid-item');
+      $(image.img).click(function(){
+        var src = $(this).attr('src');
+        $lightboxImg.attr('src', src);
+        $lightbox.show(0, function(){
+          $lightbox.css({opacity: 1});
+        });
+      });
       $item.show();
       $msnry.masonry( 'appended', $item );
       if (!scrollOnce) {
