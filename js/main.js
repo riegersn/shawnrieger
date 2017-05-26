@@ -1,14 +1,5 @@
 
 function main() {
-  var profileImg = $('.about.img-header');
-  var profileImgBottom = profileImg.offset().top + profileImg.height() - 100;
-
-  var collaboFadeIn = false;
-  var collabo = $('div.collaborators');
-  var collaboTop = collabo.offset().top - 100;
-  var collaboBottom = collaboTop + collabo.height();
-
-  collabo.find('li').css('opacity', 0);
 
   $(window).scroll(function() {
     var docTop = $(window).scrollTop();
