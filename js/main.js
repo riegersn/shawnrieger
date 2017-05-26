@@ -4,10 +4,8 @@ function main() {
   // monitor scroll for parallax
   $(window).scroll(function() {
     var scrollTop = window.pageYOffset;
-    console.log('scroll-top', scrollTop);
     $parallax.forEach(function($parallaxObj){
       var yPos = ((scrollTop - $parallaxObj.__fgOffset + 100) / $parallaxObj.__speed);
-      console.log($parallaxObj.attr('class'), yPos);
       $parallaxObj.css( {backgroundPosition: '50% ' + yPos + 'px'} );
     });
   });
