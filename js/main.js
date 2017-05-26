@@ -2,23 +2,13 @@
 function main() {
 
   $(window).scroll(function() {
-    var docTop = $(window).scrollTop();
-    var docBottom = docTop + $(window).height();
-    var newPos = docTop / 4.5;
-
-    if (profileImgBottom >= docTop && newPos <= 100) {
-      profileImg.css('background-position', '50% ' + newPos +'%');
-    }
-
-    if (collaboBottom >= docTop && collaboTop <= docBottom && !collaboFadeIn) {
-      setTimeout(function () {
-        collabo.find('li').each(function(){
-          $(this).fadeTo('slow', 1);
-          console.log('fading in!');
-        });
-      }, 1000);
-      collaboFadeIn = true;
-    }
+    var scrollTop = window.pageYOffset;
+    console.log('scroll-top', scrollTop);
+    $parallax.forEach(function($parallaxObj){
+      var yPos = ((scrollTop - $parallaxObj.__fgOffset + 100) / $parallaxObj.__speed);
+      console.log($parallaxObj.attr('class'), yPos);
+      $parallaxObj.css( {backgroundPosition: '50% ' + yPos + 'px'} );
+    });
   });
 
   $('.parallax-mouse').mousemove(function(evt){
@@ -30,4 +20,41 @@ function main() {
 
 }
 
+// pad number with 0
+function quickPad(i) {
+  i = i.toString();
+  if (i.length == 1) return '0' + i;
+  return i;
+}
+
+// load the next 6 photos
+function getPhotos(){
+  var photos = '';
+  var cnt = $('.photo-group .grid-item').length;
+  for (var i = cnt+1; i < cnt+7; i++) {
+    // TODO: stop when no photos are left
+    photos += '<div class="grid-item grid-sizer"><img src="img/photography/photography_' + quickPad(i) + '.jpg"></div>';
+  }
+  return $(photos);
+}
+
+// smooth scroll from navigation
+$('nav a').click(function(evt){
+  evt.preventDefault();
+  var id = $(this).attr('href');
+  $('html,body').animate({
+    scrollTop: $(id).offset().top - 75
+  }, 1000);
+});
+
+// load parallax elements
+var $parallax = [];
+$('div.parallax').each(function(){
+  var $elm = $(this);
+  $elm.__speed = $elm.data('speed');
+  $elm.__fgOffset = $elm.offset().top;
+  $parallax.push($elm);
+});
+
+// go, go, go
 $('document').ready(main());
