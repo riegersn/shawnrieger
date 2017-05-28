@@ -81,6 +81,7 @@ function main() {
       $lightbox.css({opacity: 1});
     });
   });
+
   $photos.imagesLoaded().always( function() {
     // fire up the masonry grid
     $msnry.masonry({
@@ -93,6 +94,10 @@ function main() {
   //handle load photos btn
   $('.load-photos').click(function(){
     var $photos = getPhotos();
+
+    if (photoBin.photos.length < 1) // eslint-disable-line
+      $(this).fadeOut();
+
     $photos.hide();
     $msnry.append($photos);
     var scrollOnce = false;
