@@ -1,34 +1,64 @@
+/*!
+ * Licensed under the MIT license
+ * by Shawn Rieger / shawnrieger.com
+ */
 
 /**
- * photography lightbox
+ * Simple helper method that scrolls the window to the given object
+ * @method scrollTo
+ * @param  {jQuery} $object Object to scroll to
  */
-var $lightbox = $('#lightbox');
-var $lightboxImg = $('#lightbox img');
-
-// TODO: add the initial 6 then bind this to them
-$('.photo-group img').click(function(){
-  var src = $(this).data('large');
-  $lightboxImg.attr('src', src);
-  $lightbox.show(0, function(){
-    $lightbox.css({opacity: 1});
-  });
-});
-
-$lightbox.click(function(){
-  $lightbox.css({opacity: 0});
-  setTimeout(function(){
-    $lightbox.hide();
-  }, 250);
-});
-
-// scrollTo - little helper function
-var scrollTo = function($object) {
+function scrollTo($object) {
   $('html,body').animate({
     scrollTop: $object.offset().top - 80
   }, 1000);
-};
+}
 
+/**
+ * Queues up random photos from the our photoBin
+ * @method getPhotos
+ * @param  {integer}  numberOfPhotos Number of photos to return, default 6
+ * @return {jQuery}                  jQuery object of photos
+ */
+function getPhotos(numberOfPhotos){
+  numberOfPhotos = numberOfPhotos || 6;
+  var photos = '';
+  var photoGroup = photoBin.getPhotos(numberOfPhotos); // eslint-disable-line
+  for (var i = 0; i < photoGroup.items.length; i++) {
+    photos += '<div class="grid-item grid-sizer"><img src="'+photoGroup.items[i].small+'" data-large="'+photoGroup.items[i].large+'"></div>';
+  }
+  return $(photos);
+}
+
+/**
+ * Our main script...
+ * @method main
+ */
 function main() {
+  var $lightbox = $('#lightbox');
+  var $lightboxImg = $('#lightbox img');
+  $lightbox.click(function(){
+    $lightbox.css({opacity: 0});
+    setTimeout(function(){
+      $lightbox.hide();
+    }, 250);
+  });
+
+  // smooth scroll from navigation
+  $('nav button').click(function(evt){
+    evt.preventDefault();
+    var $section = $('#' + $(this).data('section'));
+    scrollTo($section);
+  });
+
+  // load parallax elements
+  var $parallax = [];
+  $('div.parallax').each(function(){
+    var $elm = $(this);
+    $elm.__speed = $elm.data('speed');
+    $elm.__fgOffset = $elm.offset().top;
+    $parallax.push($elm);
+  });
 
   // monitor scroll for parallax
   $(window).scroll(function() {
@@ -39,14 +69,20 @@ function main() {
     });
   });
 
-  // fire up the masonry grid
-  var $msnry = $('.photo-group').masonry({
-    itemSelector: '.grid-item',
-    columnWidth: '.grid-sizer',
-    percentPosition: true
+  // get our initial set of photos
+  var $msnry = $('.photo-group');
+  var $photos = getPhotos();
+  $msnry.append($photos);
+  $photos.imagesLoaded().always( function() {
+    // fire up the masonry grid
+    $msnry.masonry({
+      itemSelector: '.grid-item',
+      columnWidth: '.grid-sizer',
+      percentPosition: true
+    });
   });
 
-  // handle load photos btn
+  //handle load photos btn
   $('.load-photos').click(function(){
     var $photos = getPhotos();
     $photos.hide();
@@ -71,32 +107,6 @@ function main() {
   });
 
 }
-
-// load the next 6 photos
-function getPhotos(){
-  var photos = '';
-  var photoGroup = photoBin.getPhotos(6); // eslint-disable-line
-  for (var i = 0; i < photoGroup.items.length; i++) {
-    photos += '<div class="grid-item grid-sizer"><img src="'+photoGroup.items[i].small+'" data-large="'+photoGroup.items[i].large+'"></div>';
-  }
-  return $(photos);
-}
-
-// smooth scroll from navigation
-$('nav button').click(function(evt){
-  evt.preventDefault();
-  var $section = $('#' + $(this).data('section'));
-  scrollTo($section);
-});
-
-// load parallax elements
-var $parallax = [];
-$('div.parallax').each(function(){
-  var $elm = $(this);
-  $elm.__speed = $elm.data('speed');
-  $elm.__fgOffset = $elm.offset().top;
-  $parallax.push($elm);
-});
 
 // go, go, go
 $('document').ready(main());
