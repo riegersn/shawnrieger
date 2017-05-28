@@ -73,6 +73,14 @@ function main() {
   var $msnry = $('.photo-group');
   var $photos = getPhotos();
   $msnry.append($photos);
+  $photos.find('img').click(function(){
+    var src = $(this).data('large');
+    console.log(src);
+    $lightboxImg.attr('src', src);
+    $lightbox.show(0, function(){
+      $lightbox.css({opacity: 1});
+    });
+  });
   $photos.imagesLoaded().always( function() {
     // fire up the masonry grid
     $msnry.masonry({
