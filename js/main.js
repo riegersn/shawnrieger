@@ -1,5 +1,3 @@
-// max number of photographs available
-var numberOfPhotographs = 20;
 
 /**
  * photography lightbox
@@ -7,8 +5,9 @@ var numberOfPhotographs = 20;
 var $lightbox = $('#lightbox');
 var $lightboxImg = $('#lightbox img');
 
+// TODO: add the initial 6 then bind this to them
 $('.photo-group img').click(function(){
-  var src = $(this).attr('src');
+  var src = $(this).data('large');
   $lightboxImg.attr('src', src);
   $lightbox.show(0, function(){
     $lightbox.css({opacity: 1});
@@ -56,7 +55,7 @@ function main() {
     $photos.imagesLoaded().progress( function( imgLoad, image ) {
       var $item = $( image.img ).parents('.grid-item');
       $(image.img).click(function(){
-        var src = $(this).attr('src');
+        var src = $(this).data('large');
         $lightboxImg.attr('src', src);
         $lightbox.show(0, function(){
           $lightbox.css({opacity: 1});
@@ -73,20 +72,12 @@ function main() {
 
 }
 
-// pad number with 0
-function quickPad(i) {
-  i = i.toString();
-  if (i.length == 1) return '0' + i;
-  return i;
-}
-
 // load the next 6 photos
 function getPhotos(){
   var photos = '';
-  var cnt = $('.photo-group .grid-item').length;
-  for (var i = cnt+1; i < cnt+7 && i < (numberOfPhotographs+1); i++) {
-    // TODO: stop when no photos are left
-    photos += '<div class="grid-item grid-sizer"><img src="img/photography/photography_' + quickPad(i) + '.jpg"></div>';
+  var photoGroup = photoBin.getPhotos(6); // eslint-disable-line
+  for (var i = 0; i < photoGroup.items.length; i++) {
+    photos += '<div class="grid-item grid-sizer"><img src="'+photoGroup.items[i].small+'" data-large="'+photoGroup.items[i].large+'"></div>';
   }
   return $(photos);
 }
