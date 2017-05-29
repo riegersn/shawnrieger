@@ -119,9 +119,17 @@ function main() {
     });
   });
 
-  var intro = $('#intro-content');
-  intro.css('left', ( ($(window).width() / 2) - (intro.width() + 40)) + 'px');
-  intro.show();
+  var $intros = $('#intro-content div');
+  $intros.css('right', (($(window).width() / 2) + 60) + 'px');
+  $intros.each(function(index){
+    $(this).delay(800*(index+1)).fadeIn(400);
+  });
+  setTimeout(function(){
+    $intros.each(function(index){
+      $(this).delay(130*(index+1)).animate({right: -2000, opacity: 0});
+    });
+  }, 5200);
+
 
 }
 
