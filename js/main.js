@@ -119,6 +119,10 @@ function main() {
     });
   });
 
+  var intro = $('#intro-content');
+  intro.css('left', ( ($(window).width() / 2) - (intro.width() + 40)) + 'px');
+  intro.show();
+
 }
 
 // go, go, go
