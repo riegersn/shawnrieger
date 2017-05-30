@@ -62,11 +62,15 @@ function main() {
 
   // monitor scroll for parallax
   $(window).scroll(function() {
-    var scrollTop = window.pageYOffset;
-    $parallax.forEach(function($parallaxObj){
-      var yPos = Math.floor(((scrollTop - $parallaxObj.__fgOffset + 50) / $parallaxObj.__speed) * -1);
-      $parallaxObj.stop().css( {backgroundPosition: '50% ' + yPos + 'px'} );
-    });
+    if ($(window).width() > 752) {
+      var scrollTop = window.pageYOffset;
+      $parallax.forEach(function($parallaxObj){
+        var yPos = Math.floor(((scrollTop - $parallaxObj.__fgOffset + 50) / $parallaxObj.__speed) * -1);
+        $parallaxObj.stop().css( {backgroundPosition: '50% ' + yPos + 'px'} );
+      });
+    } else {
+      $('div.parallax').css({backgroundPosition: 'center center'});
+    }
   });
 
   // get our initial set of photos
