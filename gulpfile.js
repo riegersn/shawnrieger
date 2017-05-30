@@ -13,6 +13,7 @@ var clean   = require('gulp-clean');
 var uglify  = require('gulp-uglify');
 var plumber = require('gulp-plumber');
 var sass    = require('gulp-sass');
+var bs   = require('browser-sync').create();
 
 // CLEAN DEV JS
 gulp.task('clean-dev-js', function(){
@@ -48,18 +49,6 @@ gulp.task('libs', ['clean-dev-js'], function() {
     .pipe(gulp.dest('style'));
 });
 
-// SASS
-gulp.task('sass', function () {
-  return gulp.src('sass/main.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('style'));
-});
-
-gulp.task('sass-watch', function () {
-  return gulp.watch(['sass/**/*.scss'], ['sass']);
-});
-
-
 /**
  * BUILD CLEAN
  */
@@ -68,13 +57,36 @@ gulp.task('clean', function(){
     .pipe(clean());
 });
 
+// SASS
+gulp.task('sass', function () {
+  return gulp.src('sass/main.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('style'))
+    .pipe(bs.reload({stream: true}));
+});
 
-/**
- * WATCH
- */
-// gulp.task('watch', function(){
-//   gulp.watch(['style/*.scss', 'js/*.js', '!js/*.min.js', '!js/*.pkgd.js'], ['sass', 'clean-dev-js', 'linter', 'uglify', 'libs']);
-// });
+gulp.task('browser-sync', function() {
+  bs.init({
+    server: {
+      baseDir: './'
+    },
+    ghostMode: {
+      clicks: true,
+      location: true,
+      scroll: true
+    }
+  });
+});
+
+gulp.task('watch', ['browser-sync'], function () {
+  gulp.watch('*.html').on('change', bs.reload);
+  gulp.watch('js/**/*.js', [bs.reload]);
+  gulp.watch('sass/**/*.scss', ['sass']);
+});
+
+gulp.task('sass-watch', function () {
+  return gulp.watch(['sass/**/*.scss'], ['sass']);
+});
 
 gulp.task('default', ['sass', 'linter', 'uglify', 'libs', 'sass-watch']);
 
