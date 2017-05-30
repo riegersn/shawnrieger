@@ -123,6 +123,10 @@ function main() {
       $(this).fadeOut();
   });
 
+  $(document).on('click','.navbar-collapse.collapse.in a',function() {
+    $('#myNavbar').collapse('hide');
+  });
+
 }
 
 // go, go, go
