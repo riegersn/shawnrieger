@@ -64,8 +64,8 @@ function main() {
   $(window).scroll(function() {
     var scrollTop = window.pageYOffset;
     $parallax.forEach(function($parallaxObj){
-      var yPos = ((scrollTop - $parallaxObj.__fgOffset + 100) / $parallaxObj.__speed);
-      $parallaxObj.css( {backgroundPosition: '50% ' + yPos + 'px'} );
+      var yPos = Math.floor(((scrollTop - $parallaxObj.__fgOffset + 100) / $parallaxObj.__speed) * -1);
+      $parallaxObj.stop().css( {backgroundPosition: '50% ' + yPos + 'px'} );
     });
   });
 
