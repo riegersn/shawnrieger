@@ -1,0 +1,18 @@
+.navbar {
+  background-color: $white;
+}
+
+a.navbar-brand {
+  color: $black;
+  font-family: $flower;
+  font-size: 26px;
+}
+
+nav {
+  box-shadow: 1px 1px 15px rgba(0,0,0,.2);
+  .nav a { color: $black; }
+}
+
+.nav>li>a:focus, .nav>li>a:hover {
+  background-color: $nav-hover;
+}

@@ -50,13 +50,13 @@ gulp.task('libs', ['clean-dev-js'], function() {
 
 // SASS
 gulp.task('sass', function () {
-  return gulp.src('sass/**/*.sass')
+  return gulp.src('sass/main.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('style'));
 });
 
 gulp.task('sass-watch', function () {
-  return gulp.watch(['sass/**/*.sass'], ['sass']);
+  return gulp.watch(['sass/**/*.scss'], ['sass']);
 });
 
 

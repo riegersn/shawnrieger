@@ -1,0 +1,37 @@
+
+//
+// COLORS
+//
+$white: #fff;
+$black: #111;
+$blue: #255c8c;
+$nav-hover: #f5f5f5;
+
+
+//
+// TYPOGRAPHY
+//
+$flower: 'Indie Flower', cursive;
+$roboto: 'Roboto', sans-serif;
+
+h3 {
+  font-size: 26px;
+  margin-bottom: 20px;
+  font-family: $flower;
+  text-transform: lowercase;
+}
+
+
+//
+// DEFAULTS
+//
+body {
+  font-size: 15px;
+  font-family: $roboto;
+}
+
+.container {
+  @media screen and (min-width: 1200px) {
+    width: 970px;
+  }
+}

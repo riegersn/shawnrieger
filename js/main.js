@@ -11,7 +11,7 @@
 function scrollTo($object) {
   $('html,body').animate({
     scrollTop: $object.offset().top - 80
-  }, 1000);
+  }, 1500);
 }
 
 /**
@@ -45,9 +45,9 @@ function main() {
   });
 
   // smooth scroll from navigation
-  $('nav button').click(function(evt){
+  $('nav a').click(function(evt){
     evt.preventDefault();
-    var $section = $('#' + $(this).data('section'));
+    var $section = $($(this).attr('href'));
     scrollTo($section);
   });
 
@@ -64,7 +64,7 @@ function main() {
   $(window).scroll(function() {
     var scrollTop = window.pageYOffset;
     $parallax.forEach(function($parallaxObj){
-      var yPos = Math.floor(((scrollTop - $parallaxObj.__fgOffset + 100) / $parallaxObj.__speed) * -1);
+      var yPos = Math.floor(((scrollTop - $parallaxObj.__fgOffset + 50) / $parallaxObj.__speed) * -1);
       $parallaxObj.stop().css( {backgroundPosition: '50% ' + yPos + 'px'} );
     });
   });
@@ -75,7 +75,6 @@ function main() {
   $msnry.append($photos);
   $photos.find('img').click(function(){
     var src = $(this).data('large');
-    console.log(src);
     $lightboxImg.attr('src', src);
     $lightbox.show(0, function(){
       $lightbox.css({opacity: 1});
@@ -93,16 +92,15 @@ function main() {
 
   //handle load photos btn
   $('.load-photos').click(function(){
+    var scrollOnce = false;
     var $photos = getPhotos();
-
-    if (photoBin.photos.length < 1) // eslint-disable-line
-      $(this).fadeOut();
 
     $photos.hide();
     $msnry.append($photos);
-    var scrollOnce = false;
+
     $photos.imagesLoaded().progress( function( imgLoad, image ) {
-      var $item = $( image.img ).parents('.grid-item');
+      var $item = $(image.img).parents('.grid-item');
+
       $(image.img).click(function(){
         var src = $(this).data('large');
         $lightboxImg.attr('src', src);
@@ -110,13 +108,19 @@ function main() {
           $lightbox.css({opacity: 1});
         });
       });
+
       $item.show();
+
       $msnry.masonry( 'appended', $item );
       if (!scrollOnce) {
         scrollOnce = true;
         scrollTo($item);
       }
     });
+
+    // hide the button if we have no more images left
+    if (photoBin.photos.length < 1) // eslint-disable-line
+      $(this).fadeOut();
   });
 
 }
