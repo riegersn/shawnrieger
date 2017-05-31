@@ -4,7 +4,7 @@
   <title>ShawnRieger.com: Welcome</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Roboto" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Rubik:500|Merriweather:300" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="style/main.css">
 </head>
@@ -59,10 +59,9 @@
       </div>
     </div> -->
     <div class="content">
-      <h3>about me</h3>
+      <h3 class="heading">about me</h3>
       <p>Hi, I'm Shawn.</p>
-      <p>Father. Husband. Impassioned developer with a hearty appetite for learning new things.</p>
-      <p>Born in Texas, grew up in South Jersey. Received my AAS in Computer Information Systems at Camden County College. When I'm not coding I'm spending time with my wife and <span class="collinAge">5</span> year old son.</p>
+      <p>Father. Husband. Impassioned developer with a hearty appetite for learning new things. Born in Texas, grew up in South Jersey. Received my AAS in Computer Information Systems at Camden County College. When I'm not coding I'm spending time with my wife and <span class="collinAge">5</span> year old son.</p>
       <p>Intrigued by photography, woodworking, and drawing. Enjoy fall and winter hiking on the <a href="https://en.wikipedia.org/wiki/Batona_Trail">Batona trail</a>, a 53 mile hiking trail through the Jersey Pine Barrens and others.</p>
       <p>If I wasn't a developer? I'd do something with my hands, be my own boss. A handyman most likely. I have a knack for fixing just about anything. Youtube has saved me thousands of dollars over the years.</p>
       <p>Got the bug for development in the mid-90's. You know... <a href="#">Juno</a>, <a href="#">CompuServe</a>, <a href="#">America Online</a>. Teaching myself <a href="#">Visual Basic</a>, I developed an "auto re-dialer" for AOL utilizing <a href="#">SendKeys</a>, the line was always busy in the evenings. It's difficult to describe what I felt back then. Enchanted, amazed, filled with wonder and curiosity.</p>
@@ -74,7 +73,7 @@
     <div class="header-image">
     </div>
     <div class="content">
-      <h3>work</h3>
+      <h3 class="heading">work</h3>
       <p>I started my career in the tech field working for <a href="#">Commerce Bank</a> and <a href="#">TD Bank NA</a> as an IT Help Desk agent. I got my foot in the door but it wasn't my passion. I continued coding in VB6 on the side for fun until early 2009, I discovered the small startup <a href="#">Boxee</a>.</p>
       <p>Boxee was a desktop "media-center" software turned set-top device based off <a href="#">XBMC</a>, currating video content from around the web. Their software supported building applications using XUL and Python. I quickly built a PBS and GameTrailers app. Threw up <a href="#">BoxeeHQ.com</a> to host my applications in a repository.</p>
       <p>Come mid-June of 09, my apps where gaining traction with the community, when I received a email from the Boxee guys about my work. I joined the Boxee team and continued to write apps for the platform over the next 4 years.</p>
@@ -92,7 +91,7 @@
   <section id="portfolio">
     <div class="header-image"></div>
     <div class="content">
-      <h3>portfolio</h3>
+      <h3 class="heading">portfolio</h3>
       <p>During my work with Boxee and D-Link I've had the privilage of working and colaborating with, building apps and integrating content for some really amazing companies. Just to name a few...</p>
       <div class="collaborators image-group text-center">
         <ul class="list-inline">
@@ -118,7 +117,7 @@
   <section id="photography">
     <div class="header-image"></div>
     <div class="content">
-      <h3>photography</h3>
+      <h3 class="heading">photography</h3>
       <div class="photo-group"></div>
       <button type="button" class="btn btn-primary center-block load-photos">Load More Photographs</button>
     </div>
@@ -127,29 +126,29 @@
 
 <section id="resume">
   <div class="content">
-    <h3>Résumé</h3>
-    <div class="resume-wrap">
-      <h3>Shawn N. Rieger</h3>
-      <hr />
+    <button type="button" class="btn btn-primary pull-right resume-download-btn">Download PDF</button>
+    <h3 class="heading">Résumé</h3>
+      <h4>Shawn N. Rieger</h4>
       <h4>Application Developer | Software Project Management</h4>
       <p>Innovative and diversified Software Application Developer, with a solid history of design and development expertise. Talent for identifying, isolating and resolving coding issues and analyzing end-user needs to align capabilities with overall objectives. Regarded as an innovator, developing software solutions for high-growth organizations like Sony, Pandora and MLB, and creating a stronger posture within competitive markets.</p>
-      <h5>Highlights of Expertise</h5>
+      <p><strong>Highlights of Expertise</strong></p>
       <div class="row">
-        <div class="col-xs-4">
+        <div class="col-sm-6 col-md-4">
+
           <ul>
             <li>Full Life Cycle Project Management</li>
             <li>Product Launch &amp; Implementation</li>
             <li>Client Relationship Management</li>
           </ul>
         </div>
-        <div class="col-xs-4">
+        <div class="col-sm-6 col-md-4">
           <ul>
             <li>Quality Assurance &amp; Testing</li>
             <li>Object Oriented Programming</li>
             <li>JavaScript, HTML, Qt, Python, XML</li>
           </ul>
         </div>
-        <div class="col-xs-4">
+        <div class="col-sm-6 col-md-4">
           <ul>
             <li>Agile Methodologies</li>
             <li>Software Development</li>
@@ -159,38 +158,29 @@
       </div>
       <hr />
       <h4>Career Experience</h4>
-      <div style="margin-left: 15px;">
         <p><strong>D-LINK SYSTEMS, INC.</strong>, Fountain Valley, CA<br>Drove production of robust software solutions, managing the technical-end of multiple set-top boxes. Demonstrated exceptional finesse, developing code utilizing JavaScript, Qt, Python and XML.</p>
+        <h5 class="job-title">SENIOR APPLICATION DEVELOPER - REMOTE (2013 –2017)</h5>
         <ul>
-          <li>SENIOR APPLICATION DEVELOPER - REMOTE (2013 –2017)</li>
-          <ul>
-            <li>Led technical support operations, designing application UI mockups and application assets, utilizing Photoshop.  Modified code,  resolving errors and implementing contingencies to control potentially negative impacts to the design and production lifecycle.</li>
-            <li>Nurtured partnerships with 3rd party developers to facilitate the development and market launch of software solutions.</li>
-          </ul>
+          <li>Led technical support operations, designing application UI mockups and application assets, utilizing Photoshop.  Modified code,  resolving errors and implementing contingencies to control potentially negative impacts to the design and production lifecycle.</li>
+          <li>Nurtured partnerships with 3rd party developers to facilitate the development and market launch of software solutions.</li>
         </ul>
         <p><strong>BOXEE INC.,</strong> New York, NY<br>Lead strategist, governing the development of native and intuitive set-top box applications. Developed web crawlers to aggregate movie and TV data enabling the design of a more intuitive set-top box.</p>
+        <h5 class="job-title">APPLICATION DEVELOPER - REMOTE (2013 –2017)</h5>
         <ul>
-          <li>APPLICATION DEVELOPER - REMOTE (2013 –2017)</li>
-          <ul>
-            <li>Worked collaboratively with industry moguls like Sony, MLB, NHL, TED, and Pandora, to pioneer proprietary software solutions that launched them into leading roles within a highly competitive market.</li>
-            <li>Developed application API’s, maintaining the API documentation, and created internal web application to validate content XML documents, from partners, integrating video, etc., into the platform.</li>
-            <li>Developed and maintained playback control scripts integrating set top box remote to video playback in internal browser utilizing JavaScript.</li>
-          </ul>
+          <li>Worked collaboratively with industry moguls like Sony, MLB, NHL, TED, and Pandora, to pioneer proprietary software solutions that launched them into leading roles within a highly competitive market.</li>
+          <li>Developed application API’s, maintaining the API documentation, and created internal web application to validate content XML documents, from partners, integrating video, etc., into the platform.</li>
+          <li>Developed and maintained playback control scripts integrating set top box remote to video playback in internal browser utilizing JavaScript.</li>
         </ul>
         <p><strong>TD BANK NA,</strong> Mount Laurel, NJ<br>Worked both autonomously and in a team setting, as the on-call agent after  hours and providing multi-tiered troubleshooting. Effectively enhanced resolution times, and managed queries at various threat levels.</p>
+        <h5 class="job-title">IT SERVICE DESK | LEVEL 2 REPRESENTATIVE (2007 - 2009)</h5>
         <ul>
-          <li>IT SERVICE DESK | LEVEL 2 REPRESENTATIVE (2007 - 2009)</li>
-          <ul>
-            <li>Created a comprehensive knowledgebase, ensuring high levels of proficiency.  Consistently updated information and delivered training for new employees. Redesigned help desk logo using Inkscape vector software.</li>
-          </ul>
+          <li>Created a comprehensive knowledgebase, ensuring high levels of proficiency.  Consistently updated information and delivered training for new employees. Redesigned help desk logo using Inkscape vector software.</li>
         </ul>
-      </div>
       <hr />
       <h4>Education &amp; Credentials</h4>
       <p>Associate of Applied Science in Computer InformationSystems, Camden County College, Blackwood, NJ</p>
       <p>Professional Development Training: Oracle PL/SQL &amp; Oracle DBA Certificate, DBA University Online</p>
-      <p><em>Technical Knowledge</em>: JavaScript, jQuery, React, Qt QML, Python, PHP, Bash &amp; SQL Scripting, CSS, CSS3, Sass, Less,  Bootstrap,  HTML,  HTML5,  RESTful  API,  SOAP,  HLS/HTTP  Live  Streaming,  OOP,  RDBMS,  Ajax,  JSON, RSS/ATOM,  GIT/GitHub,  Subversion,  Node.js,  NPM,  Gulp,  Bower,  Webpack,  Sublime,  Atom,  WebStorm, PHPStorm, Photoshop, Illustrator, Inkscape, GIMP, OSX, Linux, Windows</p>
-    </div>
+      <p><em>Technical Knowledge</em>: JavaScript, jQuery, React, Qt QML, Python, PHP, Bash &amp; SQL Scripting, CSS, CSS3, Sass, Less,  Bootstrap,  HTML,  HTML5, RESTful API, SOAP, HLS/HTTP Live Streaming, OOP, RDBMS, Ajax, JSON, RSS/ATOM, GIT/GitHub, Subversion, Node.js, NPM, Gulp, Bower, Sublime, Atom, WebStorm, PHPStorm, Photoshop, Illustrator, Inkscape, GIMP, OSX, Linux, Windows</p>
   </div>
 </section>
 

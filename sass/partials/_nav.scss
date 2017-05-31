@@ -1,8 +1,9 @@
 .navbar {
   background-color: $white;
   .navbar-brand {
+    font-size: 1.2em;
     color: $black;
-    font-family: $flower;
+    font-family: $_font_heading;
     text-transform: uppercase;
     line-height: 23px;
   }
