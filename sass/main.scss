@@ -2,18 +2,42 @@
 
 @import "partials/_basics";
 @import "partials/_nav";
-@import "partials/_parallax";
 @import "partials/_photogrid";
 @import "partials/_lightbox";
 
-#main {
+section {
+  max-width: 1024px;
+  margin: 0 auto;
   padding-top: 50px;
-  background-color: #fff;
+  .header-image {
+    width: 100%;
+    height: 450px;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .social-links {
+    padding: 20px;
+    background-color: $white;
+    margin-bottom: 40px;
+  }
+  .content {
+    padding: 20px;
+    background-color: $white;
+  }
 }
 
-section {
-  padding: 10px;
-}
+#about .header-image {
+  background-image: url("../img/sections/about.jpg"); }
+#work .header-image {
+  background-image: url("../img/sections/work.jpg");
+  background-position: left top; }
+#portfolio .header-image {
+  background-image: url("../img/sections/portfolio.jpg");
+  background-position: left top; }
+#photography .header-image {
+  background-image: url("../img/photography/large/20140404123054_l.jpg");
+  background-position: center center; }
 
 .image-group {
   li { padding: 20px; }

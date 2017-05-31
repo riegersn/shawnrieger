@@ -1,18 +1,33 @@
 .navbar {
   background-color: $white;
+  .content {
+    margin: 0 auto;
+    max-width: 1024px;
+  }
+  .navbar-brand {
+    color: $black;
+    font-family: $flower;
+    text-transform: uppercase;
+    line-height: 23px;
+  }
 }
 
-a.navbar-brand {
-  color: $black;
-  font-family: $flower;
-  font-size: 26px;
-}
-
-nav {
+.navbar-fixed-top {
   box-shadow: 1px 1px 15px rgba(0,0,0,.2);
-  .nav a { color: $black; }
 }
 
-.nav>li>a:focus, .nav>li>a:hover {
-  background-color: $nav-hover;
+.navbar-nav a {
+  color: $black;
+  &:focus, &:hover {
+    background-color: $nav-hover; }
+}
+
+.navbar-toggle {
+  background-color: $white;
+  &:focus,&:hover {
+    background-color: $nav-hover
+  }
+  .icon-bar {
+    background-color: $black;
+  }
 }
