@@ -9,9 +9,11 @@
  * @param  {jQuery} $object Object to scroll to
  */
 function scrollTo($object) {
-  $('html,body').animate({
-    scrollTop: $object.offset().top - 80
-  }, 1500);
+  if (typeof $object === 'object' && typeof $object.offset === 'function') {
+    $('html,body').animate({
+      scrollTop: $object.offset().top - 80
+    }, 1500);
+  }
 }
 
 /**
@@ -52,26 +54,26 @@ function main() {
   });
 
   // load parallax elements
-  var $parallax = [];
-  $('div.parallax').each(function(){
-    var $elm = $(this);
-    $elm.__speed = $elm.data('speed');
-    $elm.__fgOffset = $elm.offset().top;
-    $parallax.push($elm);
-  });
+  // var $parallax = [];
+  // $('div.parallax').each(function(){
+  //   var $elm = $(this);
+  //   $elm.__speed = $elm.data('speed');
+  //   $elm.__fgOffset = $elm.offset().top;
+  //   $parallax.push($elm);
+  // });
 
   // monitor scroll for parallax
-  $(window).scroll(function() {
-    if ($(window).width() > 752) {
-      var scrollTop = window.pageYOffset;
-      $parallax.forEach(function($parallaxObj){
-        var yPos = Math.floor(((scrollTop - $parallaxObj.__fgOffset + 50) / $parallaxObj.__speed) * -1);
-        $parallaxObj.stop().css( {backgroundPosition: '50% ' + yPos + 'px'} );
-      });
-    } else {
-      $('div.parallax').css({backgroundPosition: 'center center'});
-    }
-  });
+  // $(window).scroll(function() {
+  //   if ($(window).width() > 752) {
+  //     var scrollTop = window.pageYOffset;
+  //     $parallax.forEach(function($parallaxObj){
+  //       var yPos = Math.floor(((scrollTop - $parallaxObj.__fgOffset + 50) / $parallaxObj.__speed) * -1);
+  //       $parallaxObj.stop().css( {backgroundPosition: '50% ' + yPos + 'px'} );
+  //     });
+  //   } else {
+  //     $('div.parallax').css({backgroundPosition: 'center center'});
+  //   }
+  // });
 
   // get our initial set of photos
   var $msnry = $('.photo-group');
@@ -128,7 +130,7 @@ function main() {
   });
 
   $(document).on('click','.navbar-collapse.collapse.in a',function() {
-    $('#myNavbar').collapse('hide');
+    $('#main-nav').collapse('hide');
   });
 
 }
