@@ -6,8 +6,8 @@ $nav-hover: #f5f5f5;
 $flower: 'Indie Flower', cursive;
 $roboto: 'Roboto', sans-serif;
 
-h3 {
-  // font-size: 20px;
+section > div > h3:nth-child(1) {
+  // font-size: 28px;
   margin-bottom: 20px;
   font-family: $flower;
   text-transform: capitalize;

@@ -4,6 +4,7 @@
 @import "partials/_nav";
 @import "partials/_photogrid";
 @import "partials/_lightbox";
+@import "partials/_footer";
 
 section {
   max-width: 1024px;
@@ -24,6 +25,16 @@ section {
   .content {
     padding: 20px;
     background-color: $white;
+    .resume-wrap {
+      padding: 0 50px;
+    }
+  }
+}
+
+.navbar, .footer {
+  .content {
+    margin: 0 auto;
+    max-width: 1024px;
   }
 }
 
