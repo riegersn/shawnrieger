@@ -47,22 +47,6 @@ section {
   background-image: url("../img/photography/large/20140404123054_l.jpg");
   background-position: center center; }
 
-
-#resume {
-  .content {
-    font-family: $_font_resume;
-    h4 {
-      font-size: 20px; }
-    h5.job-title {
-      font-size: 15px;
-      padding-left: 23px; }
-  }
-  .resume-download-btn {
-    margin-top: 10px;
-    font-family: $_font_body;
-  }
-}
-
 .image-group {
   li { padding: 13px; }
   img {

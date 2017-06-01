@@ -1,0 +1,24 @@
+.resume {
+  font-size: 16px;
+  font-family: $_font_resume;
+  hr:first-of-type {
+    margin-top: 12px;
+  }
+}
+
+.resume-header {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.resume-job-title {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  padding-left: 23px;
+}
+
+.resume-download-btn {
+  margin-top: 15px;
+  font-family: $_font_body;
+}
