@@ -3,7 +3,7 @@
     float: left;
     padding: .5%;
     width: 33.333%;
-    @media screen and (max-width: 425px) { width: 48%; }
+    @media screen and (max-width: 768px) { width: 48%; }
     opacity: .8;
     // transition: all .25s ease-in-out;
     -webkit-box-sizing: border-box;
