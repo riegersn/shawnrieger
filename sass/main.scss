@@ -23,7 +23,8 @@ section {
     margin-bottom: 40px;
   }
   .content {
-    padding: 20px 50px;
+    padding: 10px 40px;
+    @media screen and (max-width: 425px) { padding: 10px 20px; }
     background-color: $white;
   }
 }
