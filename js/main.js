@@ -43,6 +43,7 @@ function main() {
   var $toTopArrow = $('.to-top-arrow');
   var $lightbox = $('#lightbox');
   var $lightboxImg = $('#lightbox img');
+
   $lightbox.click(function(){
     $lightbox.css({opacity: 0});
     setTimeout(function(){
@@ -136,6 +137,8 @@ function main() {
     $('#main-nav').collapse('hide');
   });
 
+  // fire this resize event to properly position our scroll to top arrow
+  window.dispatchEvent(new Event('resize'));
 }
 
 // go, go, go
