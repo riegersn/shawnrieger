@@ -78,7 +78,7 @@ gulp.task('browser-sync', function() {
   });
 });
 
-gulp.task('watch', ['browser-sync'], function () {
+gulp.task('watch', ['sass', 'browser-sync'], function () {
   gulp.watch('*.html').on('change', bs.reload);
   gulp.watch('js/**/*.js', [bs.reload]);
   gulp.watch('sass/**/*.scss', ['sass']);
