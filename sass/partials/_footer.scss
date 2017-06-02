@@ -2,4 +2,34 @@
   margin-top: 10px;
   padding: 20px;
   color: $white;
+  font-size: 14px;
+
+  .content {
+    margin: 0 auto;
+    max-width: 700px;
+  }
+
+  .links-header {
+    font-family: $_font_heading;
+    text-transform: uppercase;
+  }
+
+  .copy-notice {
+    margin:0;
+    padding: 20px 0 15px;
+  }
+
+  .made-with {
+    max-height: 130px;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  @media  screen and (max-width: 768px) {
+    .center-on-small {
+      text-align: center;
+    }
+  }
 }
