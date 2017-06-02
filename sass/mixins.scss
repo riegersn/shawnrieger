@@ -1,0 +1,10 @@
+// Calulates spacing for our responsive masonry grid based on number
+// of columns and desired spacing width. Use percentages for $spacing.
+// NOTE: You should set the parent container margin-left to $spacing as well.
+@mixin grid-spacing($columns, $spacing) {
+  margin: {
+    right: $spacing;
+    bottom: $spacing;
+  }
+  width: (100% - ($spacing * $columns)) / $columns;
+}
