@@ -1,11 +1,14 @@
-#photography {
+$margin-spacing: 1.5%;
+
+.photo-group {
+  margin-left: $margin-spacing;
   .grid-sizer {
+    @include grid-spacing(3, $margin-spacing);
+    @media screen and (max-width: 768px) {
+      @include grid-spacing(2, $margin-spacing); }
     float: left;
-    padding: .5%;
-    width: 33.333%;
-    @media screen and (max-width: 768px) { width: 48%; }
     opacity: .8;
-    // transition: all .25s ease-in-out;
+    transition: opacity .25s ease-in-out;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -18,8 +21,6 @@
     display: block;
     width: 100%;
     height: auto;
-    border-radius: 4px;
-    // transition: all .25s ease-in-out;
   }
   .btn {
     margin-top: 20px;
