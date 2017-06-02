@@ -13,6 +13,8 @@ function scrollTo($object) {
     $('html,body').animate({
       scrollTop: $object.offset().top - 80
     }, 1500);
+  } else {
+    console.log('scrollTo', 'Argument is not proper object.');
   }
 }
 
@@ -37,6 +39,8 @@ function getPhotos(numberOfPhotos){
  * @method main
  */
 function main() {
+  var $about = $('#about');
+  var $toTopArrow = $('.to-top-arrow');
   var $lightbox = $('#lightbox');
   var $lightboxImg = $('#lightbox img');
   $lightbox.click(function(){
@@ -53,27 +57,20 @@ function main() {
     scrollTo($section);
   });
 
-  // load parallax elements
-  // var $parallax = [];
-  // $('div.parallax').each(function(){
-  //   var $elm = $(this);
-  //   $elm.__speed = $elm.data('speed');
-  //   $elm.__fgOffset = $elm.offset().top;
-  //   $parallax.push($elm);
-  // });
+  $(window).resize(function(){
+    var sectionOffsetLeft = $about.offset().left;
+    if (sectionOffsetLeft < 45)
+      $toTopArrow.css({right: '10px', top: '80px'});
+    else
+      $toTopArrow.css({right: (sectionOffsetLeft-45) + 'px', top: '80px'});
+  });
 
-  // monitor scroll for parallax
-  // $(window).scroll(function() {
-  //   if ($(window).width() > 752) {
-  //     var scrollTop = window.pageYOffset;
-  //     $parallax.forEach(function($parallaxObj){
-  //       var yPos = Math.floor(((scrollTop - $parallaxObj.__fgOffset + 50) / $parallaxObj.__speed) * -1);
-  //       $parallaxObj.stop().css( {backgroundPosition: '50% ' + yPos + 'px'} );
-  //     });
-  //   } else {
-  //     $('div.parallax').css({backgroundPosition: 'center center'});
-  //   }
-  // });
+  $(window).scroll(function(){
+    if (window.pageYOffset >= 100 && !$toTopArrow.is(':visible'))
+      $toTopArrow.toggle();
+    else if (window.pageYOffset < 100 && $toTopArrow.is(':visible'))
+      $toTopArrow.toggle();
+  });
 
   // get our initial set of photos
   var $msnry = $('.photo-group');
@@ -127,6 +124,12 @@ function main() {
     // hide the button if we have no more images left
     if (photoBin.photos.length < 1) // eslint-disable-line
       $(this).fadeOut();
+  });
+
+  // scroll to top button
+  $toTopArrow.click(function(){
+    scrollTo($('#main'));
+    $(this).hide();
   });
 
   $(document).on('click','.navbar-collapse.collapse.in a',function() {

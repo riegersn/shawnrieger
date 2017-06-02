@@ -44,6 +44,22 @@ section {
   background-image: url("../img/photography/large/20140404123054_l.jpg");
   background-position: center center; }
 
+.to-top-arrow {
+  display: none;
+  position: fixed;
+  top: 80px;
+  right: 10px;
+  width: 30px;
+  height: 49px;
+  opacity: .2;
+  cursor: pointer;
+  transition: opacity .25s;
+  background-image: url("../img/general/to-top-arrow.png");
+  &:hover {
+    opacity: .7;
+  }
+}
+
 .image-group {
   li { padding: 13px; }
   img {
