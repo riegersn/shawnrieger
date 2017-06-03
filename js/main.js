@@ -3,27 +3,27 @@
  * by Shawn Rieger / shawnrieger.com
  */
 
-/**
- * Simple helper method that scrolls the window to the given object
- * @method scrollTo
- * @param  {jQuery} $object Object to scroll to
- */
-function scrollTo($object) {
+
+// Simple helper method that scrolls the window to the given object
+function scrollToObject($object, options) {
+  var defaults = { offset: 0, callback: null };
+  defaults = $.extend(defaults, options);
+
   if (typeof $object === 'object' && typeof $object.offset === 'function') {
-    $('html,body').animate({
-      scrollTop: $object.offset().top - 80
-    }, 1500);
+
+    $('html,body').finish().animate({
+      scrollTop: $object.offset().top - defaults.offset
+    }, 1500, function(){
+      if (typeof defaults.callback === 'function')
+        defaults.callback();
+    });
   } else {
     console.log('scrollTo', 'Argument is not proper object.');
   }
 }
 
-/**
- * Queues up random photos from the our photoBin
- * @method getPhotos
- * @param  {integer}  numberOfPhotos Number of photos to return, default 6
- * @return {jQuery}                  jQuery object of photos
- */
+
+// Queues up random photos from the our photoBin
 function getPhotos(numberOfPhotos){
   numberOfPhotos = numberOfPhotos || 6;
   var photos = '';
@@ -32,6 +32,18 @@ function getPhotos(numberOfPhotos){
     photos += '<div class="grid-item grid-sizer"><img src="'+photoGroup.items[i].small+'" data-large="'+photoGroup.items[i].large+'"></div>';
   }
   return $(photos);
+}
+
+
+// Get the offset top positions for each section
+function getSectionOffsets() {
+  var locations = [];
+  $('section').each(function(){
+    var $sec = $(this);
+    locations.push({ id: $sec.attr('id'), pos: Math.floor($sec.offset().top) });
+  });
+  console.log(locations);
+  return locations;
 }
 
 /**
@@ -44,6 +56,11 @@ function main() {
   var $lightbox = $('#lightbox');
   var $lightboxImg = $('#lightbox img');
 
+  var sections = {
+    loc: getSectionOffsets(),
+    current: 'about'
+  };
+
   $lightbox.click(function(){
     $lightbox.css({opacity: 0});
     setTimeout(function(){
@@ -55,10 +72,11 @@ function main() {
   $('nav a').click(function(evt){
     evt.preventDefault();
     var $section = $($(this).attr('href'));
-    scrollTo($section);
+    scrollToObject($section);
   });
 
   $(window).resize(function(){
+    sections.loc = getSectionOffsets();
     var sectionOffsetLeft = $about.offset().left;
     if (sectionOffsetLeft < 45)
       $toTopArrow.css({right: '10px', top: '80px'});
@@ -66,11 +84,30 @@ function main() {
       $toTopArrow.css({right: (sectionOffsetLeft-45) + 'px', top: '80px'});
   });
 
+  // Handle everything that requires scroll position here
   $(window).scroll(function(){
-    if (window.pageYOffset >= 100 && !$toTopArrow.is(':visible'))
+
+    // toggle visiblity of our 'back to top' arrow
+    if (window.pageYOffset >= 100 && !$toTopArrow.is(':visible')) {
       $toTopArrow.toggle();
-    else if (window.pageYOffset < 100 && $toTopArrow.is(':visible'))
+    } else if (window.pageYOffset < 100 && $toTopArrow.is(':visible')) {
       $toTopArrow.toggle();
+    }
+
+    // monitor position to mark
+    var curSec = '';
+    for (var i = 0; i < sections.loc.length; i++) {
+      if ((window.pageYOffset + 50) > sections.loc[i].pos) {
+        curSec = sections.loc[i].id;
+      }
+    }
+
+    if (curSec !== sections.current) {
+      $('#main-nav ul li').removeClass('active');
+      sections.current = curSec;
+      $('.nav-item-' + sections.current).addClass('active');
+    }
+
   });
 
   // get our initial set of photos
@@ -92,6 +129,9 @@ function main() {
       columnWidth: '.grid-sizer',
       percentPosition: true
     });
+
+    // images loaded, update section locations
+    sections.loc = getSectionOffsets();
   });
 
   //handle load photos btn
@@ -118,8 +158,10 @@ function main() {
       $msnry.masonry( 'appended', $item );
       if (!scrollOnce) {
         scrollOnce = true;
-        scrollTo($item);
+        scrollToObject($item, {offset: 160});
       }
+
+      sections.loc = getSectionOffsets();
     });
 
     // hide the button if we have no more images left
@@ -129,7 +171,7 @@ function main() {
 
   // scroll to top button
   $toTopArrow.click(function(){
-    scrollTo($('#main'));
+    scrollToObject($('#main'));
     $(this).hide();
   });
 
