@@ -14,6 +14,13 @@
   box-shadow: 1px 1px 15px rgba(0,0,0,.2);
 }
 
+.navbar-default .navbar-nav .active {
+  a,a:hover,a:focus {
+    color: $white;
+    background-color: $blue;
+  }
+}
+
 .navbar-nav a {
   color: $black;
   &:focus, &:hover {
