@@ -33,8 +33,8 @@
         </ul>
       </div>
       <div class="col-xs-12 col-sm-5 text-center">
-        <h4 class="links-header"><small>made with</small><img class="love" src="img/general/love.png" alt="LOVE"></h4>
-        <img class="made-with" src="img/general/built-with.png" alt="Built with Bootstrap, jQuery, Sass, Gulp, and NodeJS">
+        <h4 class="links-header"><small>made with</small><img class="love" src="/img/general/love.png" alt="LOVE"></h4>
+        <img class="made-with" src="/img/general/built-with.png" alt="Built with Bootstrap, jQuery, Sass, Gulp, and NodeJS">
       </div>
       <div class="col-xs-12 text-center">
         <h4 class="copy-notice"><small>&copy; 2017 Shawn Rieger &mdash; All Rights Reserved.</small></h4>
