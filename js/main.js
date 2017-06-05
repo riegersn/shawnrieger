@@ -4,164 +4,283 @@
  */
 
 
-// Simple helper method that scrolls the window to the given object
+// checkif we're at home, and if we got here with a hash
+var atHome = (window.location.pathname === '/');
+var hasHash = (window.location.hash !== '');
+
+// when we want to temporarily prevent scroll spying, we'll start off off ;p
+var scrollSpy = false;
+
+/**
+ * scrollToObject
+ * Simple helper method that scrolls the window to the given object
+ */
 function scrollToObject($object, options) {
-  var defaults = { offset: 0, callback: null };
+  // set our default options
+  var defaults = {
+    offset: 0,
+    callback: null
+  };
+
+  // extend defaults with options argument
   defaults = $.extend(defaults, options);
 
+  // make sure our $object is a valid object
   if (typeof $object === 'object' && typeof $object.offset === 'function') {
 
+    // finish any running animations before we start a new one
     $('html,body').finish().animate({
       scrollTop: $object.offset().top - defaults.offset
     }, 1500, function(){
+      // if our callback is valid, execute it
       if (typeof defaults.callback === 'function')
         defaults.callback();
     });
+
   } else {
+    // print to the console if we don't get a valid object
     console.log('scrollTo', 'Argument is not proper object.');
   }
 }
 
 
-// Queues up random photos from the our photoBin
+/**
+ * getPhotos
+ * Queues up random photos from the our photoBin
+ */
 function getPhotos(numberOfPhotos){
+  // number of photos defaults to 6
   numberOfPhotos = numberOfPhotos || 6;
+  // get photos from the photoBin
   var photos = '';
   var photoGroup = photoBin.getPhotos(numberOfPhotos); // eslint-disable-line
+  // itterate through our list of photos, append the html string to our photos var
   for (var i = 0; i < photoGroup.items.length; i++) {
     photos += '<div class="grid-item grid-sizer"><img src="'+photoGroup.items[i].small+'" data-large="'+photoGroup.items[i].large+'"></div>';
   }
+  // return compile photos var as a jQuery object
   return $(photos);
 }
 
 
-// Get the offset top positions for each section
+/**
+ * getSectionOffsets
+ * Get the offset top position for each section tag
+ */
 function getSectionOffsets() {
   var locations = [];
+  // itterate over each section
   $('section').each(function(){
     var $sec = $(this);
+    // push section ID and top position into locations array
     locations.push({ id: $sec.attr('id'), pos: Math.floor($sec.offset().top) });
   });
-  console.log(locations);
+  // return our updated locations
   return locations;
 }
+
 
 /**
  * Our main script...
  * @method main
  */
 function main() {
-  var $about = $('#about');
-  var $toTopArrow = $('.to-top-arrow');
   var $lightbox = $('#lightbox');
   var $lightboxImg = $('#lightbox img');
 
+  // sections object for managing
   var sections = {
     loc: getSectionOffsets(),
     current: 'about'
   };
 
+  // if we're home with no hash, go ahead and make about active
+  if (atHome) {
+    if (!hasHash) {
+      $('.nav-item-about').addClass('active');
+    } else {
+      var sel = window.location.hash.slice(1);
+      $('nav-item-' + sel).addClass('active');
+    }
+  }
+
+
+  // turn scrollSpy on
+  scrollSpy = true;
+
+
+  // contact link -- no peeking!
+  // not a persect solution but its good enough for my purposes.
+  $('.footer a.peek').click(function(){
+    // on click, replace the href with our contact link, encoded from prying bot eyes
+    $(this).attr('href', atob('bWFpbHRvOm1lQHNoYXducmllZ2VyLmNvbQ=='));
+  });
+  $('.footer a.peek').focusout(function(){
+    // when the link looses focus, put the hash back.
+    $(this).attr('href', '#');
+  });
+
+
+  // closing the lightbox, any click will close
+  // TODO: this needs improvement
   $lightbox.click(function(){
+    // set opacity to 0
     $lightbox.css({opacity: 0});
+    // css animation clears after .25s
     setTimeout(function(){
       $lightbox.hide();
     }, 250);
   });
 
+
   // smooth scroll from navigation
-  $('nav a').click(function(evt){
-    evt.preventDefault();
-    var $section = $($(this).attr('href'));
-    scrollToObject($section);
+  $('.navbar-nav li a').click(function(){
+    // we are only handling this on the homepage
+    if (atHome) {
+
+      // avoid the ui glitch when scrollspy is on, set active class manually here
+      scrollSpy = false;
+      $('#main-nav ul li').removeClass('active');
+      $(this).parent().addClass('active');
+
+      // remove leading slash
+      var id = $(this).attr('href').slice(1);
+      // scroll page to the desired section
+      scrollToObject( $(id), {callback: function(){
+        // turn scrollspy back on
+        scrollSpy = true;
+      }} );
+    }
   });
 
-  $(window).resize(function(){
-    sections.loc = getSectionOffsets();
-    var sectionOffsetLeft = $about.offset().left;
-    if (sectionOffsetLeft < 45)
-      $toTopArrow.css({right: '10px', top: '80px'});
-    else
-      $toTopArrow.css({right: (sectionOffsetLeft-45) + 'px', top: '80px'});
+
+  // scroll to top button
+  // when users click the arrow, they are transported back to the top of the page
+  $('.to-top-arrow').click(function(){
+    // scroll to top of #main div
+    scrollToObject($('#main'));
+    // hide the arrow until next time
+    $(this).hide();
   });
+
+
+  // monitor window resize, we'll need to reposition the scroll to top arrow
+  $(window).resize(function(){
+    // resizing can push elements up and down the page, we'll recalculate
+    // their positions first
+    sections.loc = getSectionOffsets();
+    // get left offset from top section
+    var secOffsetLeft = $('section').first().offset().left;
+    // depending on how condesned the window is, we'll place the arrow just off
+    // the window edge or just of the section edge
+    var rightPos = (secOffsetLeft < 45) ? '10px' : (secOffsetLeft-45) + 'px';
+    $('.to-top-arrow').css({right: rightPos, top: '80px'});
+  });
+
 
   // Handle everything that requires scroll position here
   $(window).scroll(function(){
-
+    // get our vars set
+    var yoffset = window.pageYOffset;
+    var isVisible = $('.to-top-arrow').is(':visible');
     // toggle visiblity of our 'back to top' arrow
-    if (window.pageYOffset >= 100 && !$toTopArrow.is(':visible')) {
-      $toTopArrow.toggle();
-    } else if (window.pageYOffset < 100 && $toTopArrow.is(':visible')) {
-      $toTopArrow.toggle();
+    if ( (yoffset >= 100 && !isVisible) || (yoffset < 100 && isVisible) ) {
+      $('.to-top-arrow').toggle();
     }
-
-    // monitor position to mark
-    var curSec = '';
-    for (var i = 0; i < sections.loc.length; i++) {
-      if ((window.pageYOffset + 50) > sections.loc[i].pos) {
-        curSec = sections.loc[i].id;
+    // if scrollSpy is on, lets follow
+    if (scrollSpy) {
+      var curSec = ''; // current section
+      // itterate through each section
+      for (var i = 0; i < sections.loc.length; i++) {
+        // if section position is greater than current offset + header
+        if ((window.pageYOffset + 50) > sections.loc[i].pos) {
+          curSec = sections.loc[i].id; // update current section
+        }
+      }
+      // if curSec is different from the last spyed location, update
+      if (curSec !== sections.current) {
+        // remove all active classes from nav links
+        $('#main-nav ul li').removeClass('active');
+        // update last spyed location and add active class.
+        sections.current = curSec;
+        $('.nav-item-' + sections.current).addClass('active');
       }
     }
-
-    if (curSec !== sections.current) {
-      $('#main-nav ul li').removeClass('active');
-      sections.current = curSec;
-      $('.nav-item-' + sections.current).addClass('active');
-    }
-
   });
 
-  // get our initial set of photos
+
+  //  ========================
+  //  START MASONRY PHOTO GRID
+  //  ========================
+
+  // identify our grid to use with masonry
   var $msnry = $('.photo-group');
+  // get our initial set of photos
   var $photos = getPhotos();
+  // append photos to grid
   $msnry.append($photos);
+
+  // set initial on click events
   $photos.find('img').click(function(){
+    // get large image link and set to lightbox
     var src = $(this).data('large');
     $lightboxImg.attr('src', src);
+    // show the lightbox
     $lightbox.show(0, function(){
       $lightbox.css({opacity: 1});
     });
   });
 
+  // monitor first set of photos for load completion
   $photos.imagesLoaded().always( function() {
-    // fire up the masonry grid
+    // images are loaded, lets initialize the grid
     $msnry.masonry({
       itemSelector: '.grid-item',
       columnWidth: '.grid-sizer',
       percentPosition: true
     });
-
-    // images loaded, update section locations
+    // since we added page content, lets updated our section locations
     sections.loc = getSectionOffsets();
   });
 
-  //handle load photos btn
+  // load more images button
   $('.load-photos').click(function(){
+    // we are loading 6 photos, only need to scroll once
     var scrollOnce = false;
+    // load our next set of random photos
     var $photos = getPhotos();
-
+    // lets hide the photos before we append them
     $photos.hide();
     $msnry.append($photos);
 
+    // we'll use imagesLoaded to see when each img if fully loaded
     $photos.imagesLoaded().progress( function( imgLoad, image ) {
+      // get the parent grid-item
       var $item = $(image.img).parents('.grid-item');
 
+      // set our click event for the lightbox
       $(image.img).click(function(){
+        // get large image link and set to lightbox
         var src = $(this).data('large');
         $lightboxImg.attr('src', src);
+        // show the lightbox
         $lightbox.show(0, function(){
           $lightbox.css({opacity: 1});
         });
       });
 
+      // images is loaded, we can show it and update masonry
       $item.show();
-
       $msnry.masonry( 'appended', $item );
+
+      // we've added elements to the page, time to update our section locations
+      sections.loc = getSectionOffsets();
+
+      // scroll to the first new photo we load, no more
       if (!scrollOnce) {
         scrollOnce = true;
         scrollToObject($item, {offset: 160});
       }
-
-      sections.loc = getSectionOffsets();
     });
 
     // hide the button if we have no more images left
@@ -169,19 +288,21 @@ function main() {
       $(this).fadeOut();
   });
 
-  // scroll to top button
-  $toTopArrow.click(function(){
-    scrollToObject($('#main'));
-    $(this).hide();
-  });
+  //  ======================
+  //  END MASONRY PHOTO GRID
+  //  ======================
 
+
+  // when we click on the collapsed nav, we need it to close
   $(document).on('click','.navbar-collapse.collapse.in a',function() {
     $('#main-nav').collapse('hide');
   });
 
-  // fire this resize event to properly position our scroll to top arrow
+
+  // lazy, fire this resize event to properly position our scroll to top arrow
   window.dispatchEvent(new Event('resize'));
 }
+
 
 // go, go, go
 $('document').ready(main());
