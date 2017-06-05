@@ -7,10 +7,13 @@ $_font_resume: 'Times New Roman', serif;
 $_font_body: 'Open Sans', sans-serif;
 $_font_heading: 'Rubik', sans-serif;
 
-h3.heading {
+h1,h2,h3,h4,h5 {
   margin-bottom: 20px;
   font-family: $_font_heading;
   text-transform: uppercase;
+}
+
+h3.heading {
   font-size: 1.2em;
 }
 
