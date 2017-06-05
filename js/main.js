@@ -110,7 +110,7 @@ function main() {
 
 
   // contact link -- no peeking!
-  // not a persect solution but its good enough for my purposes.
+  // not a perfect solution but its good enough for my purposes.
   $('.footer a.peek').click(function(){
     // on click, replace the href with our contact link, encoded from prying bot eyes
     $(this).attr('href', atob('bWFpbHRvOm1lQHNoYXducmllZ2VyLmNvbQ=='));
