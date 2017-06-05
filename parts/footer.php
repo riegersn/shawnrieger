@@ -16,8 +16,8 @@
         <h4 class="links-header"><small>Links</small></h4>
         <ul class="list-unstyled">
           <li><a href="/">Home</a></li>
-          <li><a href="mailto:riegersn@gmail.com">Contact</a></li>
-          <li><a href="/privacypolicy.html">Privacy Policy</a></li>
+          <li><a class="peek" href="#" target="_blank" rel="nofollow">Contact Me</a></li>
+          <li><a href="/privacy-policy">Privacy Policy</a></li>
         </ul>
       </div>
     <div class="row">
