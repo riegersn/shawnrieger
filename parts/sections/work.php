@@ -26,6 +26,7 @@
         <li><img src="img/work/employer_commercebank.png" alt="Commerce Bank" /></li>
       </ul>
     </div>
+    <h3><small>colaborations</small></h3>
     <p>During my work with Boxee and D-Link I've had the privilage of working and colaborating with, building apps and integrating content for some really amazing companies. Just to name a few...</p>
     <div class="collaborators image-group text-center">
       <ul class="list-inline">
