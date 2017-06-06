@@ -1,11 +1,19 @@
 .project {
-  display: block;
   margin-bottom: 15px;
+  cursor: pointer;
+  overflow: hidden;
+  width:100%;
+  background-position: center center;
+  background-repeat: repeat-x;
+  background-size: contain;
+  transition: all 0.2s ease-out;
+  padding-bottom: 54%;
 
-  img {
-    display: block;
-    width: 100%;
-    height: auto;
+  &:hover {
+    background-position: 7100% 50%;
   }
 
+  // .maintain-aspect {
+  //   padding-bottom: 54%;
+  // }
 }
