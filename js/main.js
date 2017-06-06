@@ -85,7 +85,6 @@ function getSectionOffsets() {
  * @method main
  */
 function main() {
-  var $lightbox = $('#lightbox');
   var $lightboxImg = $('#lightbox img');
 
   // sections object for managing
@@ -122,14 +121,10 @@ function main() {
 
 
   // closing the lightbox, any click will close
-  // TODO: this needs improvement
-  $lightbox.click(function(){
-    // set opacity to 0
-    $lightbox.css({opacity: 0});
-    // css animation clears after .25s
-    setTimeout(function(){
-      $lightbox.hide();
-    }, 250);
+  $('#lightbox').click(function(){
+    $(this).fadeOut('slow');
+    $(window).off('scroll.lightbox');
+    $('#lightbox img').attr('src', '');
   });
 
 
@@ -180,14 +175,17 @@ function main() {
 
   // Handle everything that requires scroll position here
   $(window).scroll(function(){
-    // get our vars set
+
+    // to top arrow visibility
     var yoffset = window.pageYOffset;
     var isVisible = $('.to-top-arrow').is(':visible');
     // toggle visiblity of our 'back to top' arrow
     if ( (yoffset >= 100 && !isVisible) || (yoffset < 100 && isVisible) ) {
       $('.to-top-arrow').toggle();
     }
-    // if scrollSpy is on, lets follow
+
+    // ScrollSpy
+    // ############################
     if (scrollSpy) {
       var curSec = ''; // current section
       // itterate through each section
@@ -203,6 +201,7 @@ function main() {
         $('#main-nav ul li').removeClass('active');
         // update last spyed location and add active class.
         sections.current = curSec;
+        // location.assign('#' + curSec);
         $('.nav-item-' + sections.current).addClass('active');
       }
     }
@@ -226,8 +225,10 @@ function main() {
     var src = $(this).data('large');
     $lightboxImg.attr('src', src);
     // show the lightbox
-    $lightbox.show(0, function(){
-      $lightbox.css({opacity: 1});
+    $('#lightbox').fadeIn('slow');
+    var current = $(window).scrollTop();
+    $(window).on('scroll.lightbox', function() {
+      $(window).scrollTop(current);
     });
   });
 
@@ -264,8 +265,10 @@ function main() {
         var src = $(this).data('large');
         $lightboxImg.attr('src', src);
         // show the lightbox
-        $lightbox.show(0, function(){
-          $lightbox.css({opacity: 1});
+        $('#lightbox').fadeIn('slow');
+        var current = $(window).scrollTop();
+        $(window).on('scroll.lightbox', function() {
+          $(window).scrollTop(current);
         });
       });
 
