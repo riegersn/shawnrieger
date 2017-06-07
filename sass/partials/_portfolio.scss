@@ -1,19 +1,24 @@
 .project {
-  margin-bottom: 15px;
+  position: relative;
+  margin-bottom: 30px;
   cursor: pointer;
   overflow: hidden;
-  width:100%;
-  background-position: center center;
+  width: 100%;
+  padding-bottom: (276/504) * 100%;
+  background-size: 0;
+}
+.project::before {
+  content: '';
+  position: absolute;
+  left: -100%; top: 0;
+  width: 200%; height: 100%;
+  background-position: left center;
   background-repeat: repeat-x;
   background-size: contain;
-  transition: all 0.2s ease-out;
-  padding-bottom: 54%;
-
-  &:hover {
-    background-position: 7100% 50%;
-  }
-
-  // .maintain-aspect {
-  //   padding-bottom: 54%;
-  // }
+  background-image: inherit;
+  transform-style: preserve-3d; // thanks stackoverflow!
+  transition: transform 0.2s ease-out;
+}
+.project:hover::before {
+  transform: translateX(50%);
 }
