@@ -8,9 +8,9 @@ $margin-spacing: 1%;
     opacity: .8;
     transition: opacity .25s ease-in-out;
     // use our grid-spacing mixin to calculate widths
-    @include grid-spacing(3, $margin-spacing);
-    @media screen and (max-width: 768px) {
-      @include grid-spacing(2, $margin-spacing);
+    @include grid-spacing(2, $margin-spacing);
+    @media screen and (min-width: 768px) {
+      @include grid-spacing(3, $margin-spacing);
     }
     &:hover {
       opacity: 1;
