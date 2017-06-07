@@ -5,64 +5,34 @@
 'use strict';
 
 // REQUIRE
-var gulp    = require('gulp');
-// var concat  = require('gulp-concat');
-// var eslint  = require('gulp-eslint');
-// var rename  = require('gulp-rename');
-// var clean   = require('gulp-clean');
-// var uglify  = require('gulp-uglify');
-// var plumber = require('gulp-plumber');
-var sass    = require('gulp-sass');
-var bs   = require('browser-sync').create();
+var gulp        = require('gulp'),
+    sass        = require('gulp-sass'),
+    sourcemaps  = require('gulp-sourcemaps'),
+    autoprefix  = require('gulp-autoprefixer'),
+    uglify      = require('gulp-uglify'),
+    concat      = require('gulp-concat'),
+    plumber     = require('gulp-plumber'),
+    bs          = require('browser-sync').create();
 
-// CLEAN DEV JS
-// gulp.task('clean-dev-js', function(){
-//   return gulp.src(
-//     ['js/*.min.js', 'js/*.pkgd.js'], {read: false})
-//     .pipe(clean());
-// });
 
-// LINTER
-// gulp.task('linter', ['clean-dev-js'], function(){
-//   gulp.src(['js/*.js', '!js/*.min.js', '!js/*.pkgd.js'], {base:'js/'})
-//     .pipe(eslint())
-//     .pipe(eslint.formatEach());
-// });
+// JAVASCRIPT (UGLIFY)
+gulp.task('js', function() {
+  gulp.src(['./js/photos.js', './js/main.js', '!js/*.min.js'], {base:'js/'})
+    .pipe(sourcemaps.init())
+    .pipe(uglify())
+    .pipe(sourcemaps.write())
+    .pipe(concat('main.min.js'))
+    .pipe(gulp.dest('js'));
+});
 
-/**
- * UGLIFY
- */
-// gulp.task('uglify', ['clean-dev-js'], function(){
-//   gulp.src(['js/*.js', '!js/*.min.js', '!js/*.pkgd.js'], {base:'js/'})
-//     .pipe(plumber())
-//     .pipe(uglify())
-//     .pipe(rename({suffix:'.min'}))
-//     .pipe(plumber.stop())
-//     .pipe(gulp.dest('js'));
-// });
-
-/**
- * VENDOR LIBRARIES
- */
-// gulp.task('libs', ['clean-dev-js'], function() {
-//   gulp.src(['node_modules/normalize.css/normalize.css'])
-//     .pipe(gulp.dest('style'));
-// });
-
-/**
- * BUILD CLEAN
- */
-// gulp.task('clean', function(){
-//   return gulp.src('build', {read: false})
-//     .pipe(clean());
-// });
-
-// SASS
+// Process Sass
 gulp.task('sass', function () {
-  return gulp.src('sass/main.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('style'))
-    .pipe(bs.reload({stream: true}));
+  return gulp.src('./sass/**/*.scss')
+    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+    .pipe(sourcemaps.init())
+    .pipe(autoprefix({browsers: ['last 2 versions']}))
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('style'));
 });
 
 gulp.task('browser-sync', function() {
@@ -78,7 +48,12 @@ gulp.task('browser-sync', function() {
   });
 });
 
-gulp.task('watch', ['sass', 'browser-sync'], function () {
+gulp.task('watch', ['sass', 'js'], function () {
+  gulp.watch('js/*.js', ['js']);
+  gulp.watch('sass/**/*.scss', ['sass']);
+});
+
+gulp.task('watch-browser', ['sass', 'browser-sync'], function () {
   gulp.watch('*.html').on('change', bs.reload);
   gulp.watch('js/**/*.js', [bs.reload]);
   gulp.watch('sass/**/*.scss', ['sass']);
