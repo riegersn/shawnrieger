@@ -28,9 +28,9 @@ gulp.task('js', function() {
 // Process Sass
 gulp.task('sass', function () {
   return gulp.src('./sass/**/*.scss')
-    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
     .pipe(sourcemaps.init())
-    .pipe(autoprefix({browsers: ['last 2 versions']}))
+    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+    //.pipe(autoprefix({browsers: ['last 2 versions']}))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest('style'));
 });
