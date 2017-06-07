@@ -17,12 +17,12 @@
     <div class="row">
       <?php
         $outer_class = 'project';
-        $bs_col_class = 'col-xs-12 col-sm-6 col-md-4';
+        $bs_col_class = 'col-xs-12 col-sm-6';
         $thumb = '/img/portfolio/apps/%s/%s_thumb.jpg';
 
         $portfolio = array(
           'pandora'       => 'Pandora Radio',
-          'mlb'           =>  'MLB.TV',
+          'mlb'           => 'MLB.TV',
           'revision3'     => 'Revision3',
           'suicidegirls'  => 'SuicideGirls',
           'nhl'           => 'NHL.TV',
@@ -34,7 +34,7 @@
         foreach ($portfolio as $id => $name) {
           $bg_img = sprintf($thumb, $id, $id);
           echo "<div class=\"${bs_col_class}\">
-                  <a href=\"#\" data-projectid=\"${id}\">
+                  <a href=\"/portfolio/${id}\" data-projectid=\"${id}\">
                     <div class=\"${outer_class} ${id}\" style=\"background-image:url('${bg_img}')\">
                     </div>
                   </a>
