@@ -7,6 +7,8 @@
    * Privacy Policy
    */
 
+   $_SESSION['title'] = 'Shawn Rieger | Privacy Policy'
+
 ?>
 
 <!DOCTYPE html>
