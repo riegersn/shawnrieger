@@ -18,17 +18,17 @@
       <?php
         $outer_class = 'project';
         $bs_col_class = 'col-xs-12 col-sm-6 col-md-4';
-        $thumb = '/img/portfolio/apps/%s/%s_thumb.png';
+        $thumb = '/img/portfolio/apps/%s/%s_thumb.jpg';
 
         $portfolio = array(
           'pandora'       => 'Pandora Radio',
-          'revision3'     => 'Revision3',
           'mlb'           =>  'MLB.TV',
+          'revision3'     => 'Revision3',
           'suicidegirls'  => 'SuicideGirls',
           'nhl'           => 'NHL.TV',
           'ted'           => 'TED',
-          'accuweather'   => 'Accuweather',
-          'gbtv'          => 'GBTV'
+          'gbtv'          => 'GBTV',
+          'accuweather'   => 'Accuweather'
         );
 
         foreach ($portfolio as $id => $name) {
