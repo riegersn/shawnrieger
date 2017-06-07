@@ -36,7 +36,6 @@
           echo "<div class=\"${bs_col_class}\">
                   <a href=\"#\" data-projectid=\"${id}\">
                     <div class=\"${outer_class} ${id}\" style=\"background-image:url('${bg_img}')\">
-                      <div class=\"maintain-aspect\"></div>
                     </div>
                   </a>
                 </div>";
