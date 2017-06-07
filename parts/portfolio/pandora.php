@@ -7,7 +7,7 @@
    * Portfolio Section / Pandora
    */
 
-   $dir    = './img/portfolio/apps/pandora';
+   $dir    = './img/portfolio/pandora';
    $files = scandir($dir);
 
    $screens = [];
@@ -48,7 +48,7 @@
         foreach ($screens as $filename) {
           echo "<div class=\"col-xs-12 col-sm-6 col-md-4\">
                   <a href=\"#\" class=\"thumbnail\">
-                    <img src=\"/img/portfolio/apps/pandora/{$filename}\">
+                    <img src=\"/img/portfolio/pandora/{$filename}\">
                   </a>
                 </div>";
         }

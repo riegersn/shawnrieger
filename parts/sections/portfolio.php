@@ -18,7 +18,7 @@
       <?php
         $outer_class = 'project';
         $bs_col_class = 'col-xs-12 col-sm-6';
-        $thumb = '/img/portfolio/apps/%s/%s_thumb.jpg';
+        $thumb = '/img/portfolio/%s/%s_thumb.jpg';
 
         $portfolio = array(
           'pandora'       => 'Pandora Radio',
