@@ -25,10 +25,26 @@
     'accuweather'   => 'Accuweather'
   );
 
+  // check for valid proj id
   if (!isset($portfolio[$id]))
     exit();
 
-  $_SESSION['title'] = 'Shawn Rieger | Portfolio | ' . $portfolio[$id];
+  // get proj title, splash & create screenshot array
+  $title   = $portfolio[$id];
+  $splash  = '/img/portfolio/' . $id . '/' . $id . '_splash.jpg';
+  $screens = [];
+
+  // scan proj img dir for files
+  $files = scandir('./img/portfolio/' . $id);
+
+  // filter only screenshot files and add them to our array
+  foreach ($files as $file) {
+    if ( strpos($file, '_screen_') !== false )
+      $screens[] = $file;
+  }
+
+  // set the page title
+  $_SESSION['title'] = 'Shawn Rieger | Portfolio | ' . $title;
 
 ?>
 
@@ -43,16 +59,39 @@
   <?php include 'parts/nav.php' ?>
 
   <div id="main">
-    <!-- include specified portfolio page -->
-    <?php include 'parts/portfolio/' . $id . '.php'; ?>
+    <section id="showcase">
 
-    <section>
-      <div class="content">
-          <a href="/#portfolio"></a>
+      <!-- header splash, auto loaded from _splash file in the proj img dir -->
+      <div class="header-image" style="background-image:url('<?=$splash?>')">
       </div>
-    </section>
+      <div class="content">
+        <ol class="breadcrumb">
+          <li><a href="/">Home</a></li>
+          <li><a href="/#portfolio">Portfolio</a></li>
+          <li class="active"><?=$title?></li>
+        </ol>
+        <h3><?=$title?></h3>
 
-  </div>
+        <!-- include specified portfolio page text -->
+        <?php include 'parts/portfolio/' . $id . '.php'; ?>
+
+        <!-- portfolio proj images, auto populated from *_screen_* files in the img dir -->
+        <div class="row">
+          <?php foreach ($screens as $filename) { ?>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+              <a onclick="alert('asdf');" class="thumbnail">
+                <img src="/img/portfolio/<?=$id?>/<?=$filename?>">
+              </a>
+            </div>
+          <?php } ?>
+        </div>
+
+      </div> <!-- .content -->
+    </section> <!-- #showcase -->
+  </div> <!-- #main -->
+
+  <!-- include lightbox component -->
+  <?php include 'parts/components/lightbox.php'; ?>
 
   <!-- include footer -->
   <?php include 'parts/footer.php'; ?>
