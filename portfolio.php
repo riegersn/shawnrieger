@@ -30,9 +30,6 @@
 
   $_SESSION['title'] = 'Shawn Rieger | Portfolio | ' . $portfolio[$id];
 
-  include 'parts/header.php';
-  include 'parts/nav.php';
-
 ?>
 
 <!DOCTYPE html>
