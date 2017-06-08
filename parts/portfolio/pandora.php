@@ -18,7 +18,7 @@
 <!-- about the project -->
 <p>I was tasked with building a fully functional Pandora application for the Boxee TV using <code>JavaScript</code> and <code>QML</code>. The functional design was straight forward, as we were working off a similar design from an older version of Pandora that ran on the original Boxee Box. The old design ran in a 720p environment while the new one would need to support 1080p, so the graphical assets had to be recreated by our graphics designer.</p>
 <p>With my new assets in hand, I got to work building the initial structure. The entire app would be contained within a single window with panels that (I referenced as 'blades') would slide up over the main control blade which always remained open during normal operation.</p>
-<p>All in all the Pandora application supported the following features and requirements...</p>
+<h3><small>Pandora Application Features</small></h3>
 
 <!-- list of features, important info -->
 <ul>
