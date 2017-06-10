@@ -14,6 +14,7 @@
 
   $id = $_GET['id'];
 
+  // TODO: move all portfolio info into JSON
   $portfolio = array(
     'pandora'       => 'Pandora Radio',
     'mlb'           => 'MLB.TV',
@@ -76,10 +77,10 @@
         <?php include 'parts/portfolio/' . $id . '.php'; ?>
 
         <!-- portfolio proj images, auto populated from *_screen_* files in the img dir -->
-        <div class="row">
+        <div class="row gallery">
           <?php foreach ($screens as $filename) { ?>
             <div class="col-xs-12 col-sm-6 col-md-4">
-              <a class="thumbnail">
+              <a class="thumbnail gallery-item">
                 <img src="/img/portfolio/<?=$id?>/<?=$filename?>">
               </a>
             </div>
@@ -92,6 +93,7 @@
 
   <!-- include lightbox component -->
   <?php include 'parts/components/lightbox.php'; ?>
+  <?php include 'parts/components/to-top-arrow.php'; ?>
 
   <!-- include footer -->
   <?php include 'parts/footer.php'; ?>

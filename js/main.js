@@ -301,9 +301,21 @@ function main() {
     $('#main-nav').collapse('hide');
   });
 
+  $(document).on('click', '.gallery-item', function() {
+    var $img = $(this).find('img').first();
+    var src = $img.data('large') || $img.attr('src');
+    $lightboxImg.attr('src', src);
+    // show the lightbox
+    $('#lightbox').fadeIn('slow');
+    var current = $(window).scrollTop();
+    $(window).on('scroll.lightbox', function() {
+      $(window).scrollTop(current);
+    });
+  });
+
 
   // lazy, fire this resize event to properly position our scroll to top arrow
-  window.dispatchEvent(new Event('resize'));
+  // window.dispatchEvent(new Event('resize'));
 }
 
 
