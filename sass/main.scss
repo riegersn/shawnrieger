@@ -42,7 +42,7 @@ section {
   background-image: url("../img/sections/work.jpg");
   background-position: left top; }
 #portfolio .header-image {
-  background-image: url("../img/sections/portfolio.jpg");
+  background-image: url("../img/portfolio/pandora/pandora_screen_01.jpg");
   background-position: left top; }
 #photography .header-image {
   background-image: url("../img/photography/large/20140404123054_l.jpg");
@@ -69,5 +69,13 @@ section {
   img {
     max-width: 110px;
     max-height: 50px;
+  }
+}
+
+.image-group-large {
+  li { padding: 16px; }
+  img {
+    max-width: 140px;
+    max-height: 80px;
   }
 }
