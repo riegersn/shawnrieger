@@ -16,7 +16,7 @@
 
   $portfolio = array(
     'pandora'       => 'Pandora Radio',
-    'mlb'           =>  'MLB.TV',
+    'mlb'           => 'MLB.TV',
     'revision3'     => 'Revision3',
     'suicidegirls'  => 'SuicideGirls',
     'nhl'           => 'NHL.TV',
@@ -79,7 +79,7 @@
         <div class="row">
           <?php foreach ($screens as $filename) { ?>
             <div class="col-xs-12 col-sm-6 col-md-4">
-              <a onclick="alert('asdf');" class="thumbnail">
+              <a class="thumbnail">
                 <img src="/img/portfolio/<?=$id?>/<?=$filename?>">
               </a>
             </div>
@@ -95,6 +95,9 @@
 
   <!-- include footer -->
   <?php include 'parts/footer.php'; ?>
+
+  <!-- iclude our scripts -->
+  <?php include 'parts/scripts.php'; ?>
 
 </body>
 </html>
