@@ -27,7 +27,6 @@
   <li><code>XUL</code></li>
   <li><code>Python</code></li>
   <li><code>PHP</code></li>
-  <li><code>XML</code></li>
 </ul>
 
 <!-- divider -->

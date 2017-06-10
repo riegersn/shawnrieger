@@ -37,6 +37,15 @@
 
 <!-- list of links -->
 <ul class="list-inline">
+  <li><code>JavaScript</code></li>
+  <li><code>QML</code></li>
+</ul>
+
+<!-- divider -->
+<hr>
+
+<!-- list of links -->
+<ul class="list-inline">
   <li><a href="https://github.com/riegersn/mlb-btv" target="_blank"><img class="git-icon" src="/img/general/github.png" alt="">View on Github</a></li>
 </ul>
 
