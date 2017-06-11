@@ -17,7 +17,7 @@
 
 <!-- about the project -->
 <p>The Revision3 application was a straight forward, one 'page' application designed myself from the ground up. It featured 2 rows with a hidden 3<sup>rd</sup> that was only visible when selecting a series title.</p> The top row was a 'jumbotron' or 'showcase' list that contained featured episodes and videos. The video thumbnails would slide from side to side depending on which direction you'd press the remote, the focus would always remain centered.</p>
-<p>The 2<sup>nd</sup> row contained all available Revision3 series. The entire list would shift from right to left while focus remaied centered similar to the featured shows. When you clicked the select button on the remote, the entire screen would slide up to reveal that series episodes.</p>
+<p>The 2<sup>nd</sup> row contained all available Revision3 series. The entire list would shift from right to left while focus remained centered similarly to the featured shows. When you clicked the select button on the remote, the entire screen would slide up to reveal that series episodes.</p>
 <p>I've always been a fan and big supporter of Revision3 and all of the <a href="https://en.wikipedia.org/wiki/TechTV" target="_blank">TechTV</a> guys, way back to the days of <a href="https://en.wikipedia.org/wiki/The_Screen_Savers" target="_blank">The Screen Savers</a> TV show. So I always made sure their content had a home at Boxee.</p>
 
 
