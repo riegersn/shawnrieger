@@ -54,25 +54,6 @@ function getScrollbarSize() {
 
 
 /**
- * getPhotos
- * Queues up random photos from the our photoBin
- */
-function getPhotos(numberOfPhotos){
-  // number of photos defaults to 6
-  numberOfPhotos = numberOfPhotos || 6;
-  // get photos from the photoBin
-  var photos = '';
-  var photoGroup = photoBin.getPhotos(numberOfPhotos); // eslint-disable-line
-  // itterate through our list of photos, append the html string to our photos var
-  for (var i = 0; i < photoGroup.items.length; i++) {
-    photos += '<div class="grid-item grid-sizer gallery-item"><img src="'+photoGroup.items[i].small+'" data-large="'+photoGroup.items[i].large+'"></div>';
-  }
-  // return compile photos var as a jQuery object
-  return $(photos);
-}
-
-
-/**
  * getSectionOffsets
  * Get the offset top position for each section tag
  */
@@ -228,7 +209,7 @@ function main() {
   // identify our grid to use with masonry
   var $msnry = $('.photo-group');
   // get our initial set of photos
-  var $photos = getPhotos();
+  var $photos = photoBin.getPhotos(); // eslint-disable-line
   // append photos to grid
   $msnry.append($photos);
 
@@ -249,7 +230,7 @@ function main() {
     // we are loading 6 photos, only need to scroll once
     var scrollOnce = false;
     // load our next set of random photos
-    var $photos = getPhotos();
+    var $photos = photoBin.getPhotos(); // eslint-disable-line
     // lets hide the photos before we append them
     $photos.hide();
     $msnry.append($photos);

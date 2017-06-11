@@ -57,6 +57,15 @@ var photoIds = [
 var photoBin = {
   photos: [],
 
+  populateBin: function() {
+    for (var i in photoIds) {
+      photoBin.photos.push({
+        small: 'img/photography/small/' + photoIds[i] + '_s.jpg',
+        large: 'img/photography/large/' + photoIds[i] + '_l.jpg'
+      });
+    }
+  },
+
   getRandomPhoto: function() {
     if (this.photos.length > 0) {
       var random = Math.floor(Math.random() * this.photos.length);
@@ -69,25 +78,16 @@ var photoBin = {
   },
 
   getPhotos: function(count) {
-    var items = [];
-    for (var i = 0; i < count; i++) {
+    var photos = '';
+    var numOfPhotos = count || 6;
+    for (var i = 0; i < numOfPhotos; i++) {
       var item = this.getRandomPhoto();
-      if (item)
-        items.push(item);
+      if (item) {
+        photos += '<div class="grid-item grid-sizer gallery-item"><img src="'+
+                  item.small+'" data-large="'+item.large+'"></div>';
+      }
     }
-    return {
-      items: items,
-      photosLeft: this.photos.length
-    };
-  },
-
-  populateBin: function() {
-    for (var i in photoIds) {
-      photoBin.photos.push({
-        small: 'img/photography/small/' + photoIds[i] + '_s.jpg',
-        large: 'img/photography/large/' + photoIds[i] + '_l.jpg'
-      });
-    }
+    return $(photos);
   }
 };
 
