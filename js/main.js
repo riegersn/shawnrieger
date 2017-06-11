@@ -43,6 +43,15 @@ function scrollToObject($object, options) {
   }
 }
 
+function getScrollbarSize() {
+  var scrollDiv = document.createElement('div');
+  scrollDiv.style.cssText = 'width: 99px; height: 99px; overflow: scroll; position: absolute; top: -9999px;';
+  document.body.appendChild(scrollDiv);
+  var scrollbarSize = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+  document.body.removeChild(scrollDiv);
+  return scrollbarSize;
+}
+
 
 /**
  * getPhotos
@@ -122,7 +131,8 @@ function main() {
 
   // closing the lightbox, any click will close
   $('#lightbox').click(function(){
-    $(this).fadeOut('slow');
+    $('body').removeAttr('style');
+    $(this).fadeOut('slow', function(){  });
     $(window).off('scroll.lightbox');
     $('#lightbox img').attr('src', '');
   });
@@ -219,19 +229,6 @@ function main() {
   // append photos to grid
   $msnry.append($photos);
 
-  // set initial on click events
-  $photos.find('img').click(function(){
-    // get large image link and set to lightbox
-    var src = $(this).data('large');
-    $lightboxImg.attr('src', src);
-    // show the lightbox
-    $('#lightbox').fadeIn('slow');
-    var current = $(window).scrollTop();
-    $(window).on('scroll.lightbox', function() {
-      $(window).scrollTop(current);
-    });
-  });
-
   // monitor first set of photos for load completion
   $photos.imagesLoaded().always( function() {
     // images are loaded, lets initialize the grid
@@ -258,19 +255,6 @@ function main() {
     $photos.imagesLoaded().progress( function( imgLoad, image ) {
       // get the parent grid-item
       var $item = $(image.img).parents('.grid-item');
-
-      // set our click event for the lightbox
-      $(image.img).click(function(){
-        // get large image link and set to lightbox
-        var src = $(this).data('large');
-        $lightboxImg.attr('src', src);
-        // show the lightbox
-        $('#lightbox').fadeIn('slow');
-        var current = $(window).scrollTop();
-        $(window).on('scroll.lightbox', function() {
-          $(window).scrollTop(current);
-        });
-      });
 
       // images is loaded, we can show it and update masonry
       $item.show();
@@ -306,6 +290,8 @@ function main() {
     var src = $img.data('large') || $img.attr('src');
     $lightboxImg.attr('src', src);
     // show the lightbox
+    var ss = getScrollbarSize();
+    $('body').css({overflow: 'hidden', paddingRight: ss + 'px'});
     $('#lightbox').fadeIn('slow');
     var current = $(window).scrollTop();
     $(window).on('scroll.lightbox', function() {
@@ -315,7 +301,7 @@ function main() {
 
 
   // lazy, fire this resize event to properly position our scroll to top arrow
-  // window.dispatchEvent(new Event('resize'));
+  window.dispatchEvent(new Event('resize'));
 }
 
 
