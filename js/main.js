@@ -135,8 +135,8 @@ function main() {
 
   // closing the lightbox, any click will close
   $('#lightbox').click(function(){
-    $('body').removeAttr('style');
-    $(this).fadeOut('slow', function(){  });
+    $('body, nav.navbar').removeAttr('style');
+    $(this).fadeOut('slow');
     $(window).off('scroll.lightbox');
     $('#lightbox img').attr('src', '');
   });
@@ -298,9 +298,10 @@ function main() {
     src = src.replace(/\/$/, '').split('/');
     mixpanel.track('photo-clicked', { 'photo-name' : src[src.length-1] }); // eslint-disable-line
 
-    // show the lightbox
-    var ss = getScrollbarSize();
-    $('body').css({overflow: 'hidden', paddingRight: ss + 'px'});
+    var rPad = getScrollbarSize() +'px';
+
+    $('body').css({overflow: 'hidden', paddingRight: rPad});
+    $('nav.navbar').css({paddingRight: rPad});
     $('#lightbox').fadeIn('slow');
     var current = $(window).scrollTop();
     $(window).on('scroll.lightbox', function() {
