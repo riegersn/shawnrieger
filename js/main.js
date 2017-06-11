@@ -264,6 +264,12 @@ function main() {
   //  ======================
 
 
+  // no right clicks
+  $('#lightbox').on('contextmenu', function(e) {
+    e.preventDefault();
+  });
+
+
   // when we click on the collapsed nav, we need it to close
   $(document).on('click','.navbar-collapse.collapse.in a',function() {
     $('#main-nav').collapse('hide');
