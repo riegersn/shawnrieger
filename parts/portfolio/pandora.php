@@ -47,7 +47,7 @@
 
 <!-- list of links -->
 <ul class="list-inline">
-  <li><a href="https://github.com/riegersn/pandora-btv" target="_blank"><img class="git-icon" src="/img/general/github.png" alt="">View on Github</a></li>
+  <li><a class="track-link" href="https://github.com/riegersn/pandora-btv" target="_blank"><img class="git-icon" src="/img/general/github.png" alt="">View on Github</a></li>
 </ul>
 
 <!-- divider -->

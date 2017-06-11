@@ -65,7 +65,7 @@ function getPhotos(numberOfPhotos){
   var photoGroup = photoBin.getPhotos(numberOfPhotos); // eslint-disable-line
   // itterate through our list of photos, append the html string to our photos var
   for (var i = 0; i < photoGroup.items.length; i++) {
-    photos += '<div class="grid-item grid-sizer"><img src="'+photoGroup.items[i].small+'" data-large="'+photoGroup.items[i].large+'"></div>';
+    photos += '<div class="grid-item grid-sizer gallery-item"><img src="'+photoGroup.items[i].small+'" data-large="'+photoGroup.items[i].large+'"></div>';
   }
   // return compile photos var as a jQuery object
   return $(photos);
@@ -94,7 +94,11 @@ function getSectionOffsets() {
  * @method main
  */
 function main() {
-  var $lightboxImg = $('#lightbox img');
+
+  mixpanel.track('page-viewed', { // eslint-disable-line
+    'page-title' : document.title,
+    'page-url' : window.location.pathname
+  });
 
   // sections object for managing
   var sections = {
@@ -142,6 +146,11 @@ function main() {
   $('.navbar-nav li a').click(function(){
     // we are only handling this on the homepage
     if (atHome) {
+
+      mixpanel.track('page viewed', { // eslint-disable-line
+        'page name' : document.title,
+        'url' : window.location.pathname
+      });
 
       // avoid the ui glitch when scrollspy is on, set active class manually here
       scrollSpy = false;
@@ -288,7 +297,13 @@ function main() {
   $(document).on('click', '.gallery-item', function() {
     var $img = $(this).find('img').first();
     var src = $img.data('large') || $img.attr('src');
-    $lightboxImg.attr('src', src);
+
+    $('#lightbox img').attr('src', src);
+
+    // track mixpanel event
+    src = src.replace(/\/$/, '').split('/');
+    mixpanel.track('photo-clicked', { 'photo-name' : src[src.length-1] }); // eslint-disable-line
+
     // show the lightbox
     var ss = getScrollbarSize();
     $('body').css({overflow: 'hidden', paddingRight: ss + 'px'});
@@ -297,6 +312,11 @@ function main() {
     $(window).on('scroll.lightbox', function() {
       $(window).scrollTop(current);
     });
+  });
+
+  mixpanel.track_links('.track-link', 'link-clicked'); // eslint-disable-line
+  $('button').click(function(){
+    mixpanel.track('button-clicked', { 'button-name' : $(this).data('name') }); // eslint-disable-line
   });
 
 

@@ -12,7 +12,7 @@
 
 <section id="resume">
   <div class="content resume">
-    <a href="./downloads/shawn-rieger-2017.pdf" download><button type="button" class="btn btn-primary pull-right resume-download-btn">Download PDF</button></a>
+    <a href="/downloads/shawn-rieger-2017.pdf" download><button type="button" class="btn btn-primary pull-right resume-download-btn" data-name="resume-download">Download PDF</button></a>
     <h3 class="heading">Résumé</h3>
       <h4 class="resume-header">Shawn N. Rieger</h4>
       <h4 class="resume-header text-center"><strong>Application Developer | Software Project Management</strong></h4>
