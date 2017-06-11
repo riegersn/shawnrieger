@@ -315,7 +315,7 @@ function main() {
   });
 
   mixpanel.track_links('.track-link', 'link-clicked'); // eslint-disable-line
-  $('button').click(function(){
+  $('button[data-name]').click(function(){
     mixpanel.track('button-clicked', { 'button-name' : $(this).data('name') }); // eslint-disable-line
   });
 
