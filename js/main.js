@@ -146,12 +146,6 @@ function main() {
   $('.navbar-nav li a').click(function(){
     // we are only handling this on the homepage
     if (atHome) {
-
-      mixpanel.track('page viewed', { // eslint-disable-line
-        'page name' : document.title,
-        'url' : window.location.pathname
-      });
-
       // avoid the ui glitch when scrollspy is on, set active class manually here
       scrollSpy = false;
       $('#main-nav ul li').removeClass('active');
