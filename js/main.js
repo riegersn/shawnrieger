@@ -3,254 +3,228 @@
  * by Shawn Rieger / shawnrieger.com
  */
 
+$(function(){
 
-// checkif we're at home, and if we got here with a hash
-var atHome = (window.location.pathname === '/');
-var hasHash = (window.location.hash !== '');
-
-// when we want to temporarily prevent scroll spying, we'll start off off ;p
-var scrollSpy = false;
-
-/**
- * scrollToObject
- * Simple helper method that scrolls the window to the given object
- */
-function scrollToObject($object, options) {
-  // set our default options
-  var defaults = {
-    offset: 0,
-    callback: null
-  };
-
-  // extend defaults with options argument
-  defaults = $.extend(defaults, options);
-
-  // make sure our $object is a valid object
-  if (typeof $object === 'object' && typeof $object.offset === 'function') {
-
-    // finish any running animations before we start a new one
-    $('html,body').finish().animate({
-      scrollTop: $object.offset().top - defaults.offset
-    }, 1500, function(){
-      // if our callback is valid, execute it
-      if (typeof defaults.callback === 'function')
-        defaults.callback();
-    });
-
-  } else {
-    // print to the console if we don't get a valid object
-    console.log('scrollTo', 'Argument is not proper object.');
-  }
-}
-
-function getScrollbarSize() {
-  var scrollDiv = document.createElement('div');
-  scrollDiv.style.cssText = 'width: 99px; height: 99px; overflow: scroll; position: absolute; top: -9999px;';
-  document.body.appendChild(scrollDiv);
-  var scrollbarSize = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-  document.body.removeChild(scrollDiv);
-  return scrollbarSize;
-}
-
-
-/**
- * getSectionOffsets
- * Get the offset top position for each section tag
- */
-function getSectionOffsets() {
-  var locations = [];
-  // itterate over each section
-  $('section').each(function(){
-    var $sec = $(this);
-    // push section ID and top position into locations array
-    locations.push({ id: $sec.attr('id'), pos: Math.floor($sec.offset().top) });
-  });
-  // return our updated locations
-  return locations;
-}
-
-
-/**
- * Our main script...
- * @method main
- */
-function main() {
-
+  // track page view
   mixpanel.track('page-viewed', { // eslint-disable-line
     'page-title' : document.title,
     'page-url' : window.location.pathname
   });
 
-  // sections object for managing
-  var sections = {
-    loc: getSectionOffsets(),
-    current: 'about'
+
+  var shawnRieger = {
+    scrollSpy: true,
+    contact: 'bWFpbHRvOm1lQHNoYXducmllZ2VyLmNvbQ==',
+    atHome: (window.location.pathname === '/'),
+    hash: window.location.hash,
+    sections: {
+      loc: [],
+      current: 'about'
+    }
   };
 
-  // if we're home with no hash, go ahead and make about active
-  if (atHome) {
-    if (!hasHash) {
-      $('.nav-item-about').addClass('active');
-    } else {
-      var sel = window.location.hash.slice(1);
-      $('nav-item-' + sel).addClass('active');
-    }
+
+  // set active tab
+  if (shawnRieger.atHome) {
+    var selector = '.nav-item-' + ((!shawnRieger.hash) ? 'about' : shawnRieger.hash.slice(1));
+    $(selector).addClass('active');
   }
 
 
-  // turn scrollSpy on
-  scrollSpy = true;
+  // Scrolls the window to the given object
+  var scrollToObject = function($object, offset) {
+    if (typeof $object === 'object' && typeof $object.offset === 'function') {
+      shawnRieger.scrollSpy = false; // we don't want this active while animating
+      $('html,body').finish().animate({
+        scrollTop: $object.offset().top - (offset || 0)
+      }, 750, function() {
+        shawnRieger.scrollSpy = true;
+      });
+    }
+  };
 
 
-  // contact link -- no peeking!
-  // not a perfect solution but its good enough for my purposes.
-  $('.footer a.peek').click(function(){
-    // on click, replace the href with our contact link, encoded from prying bot eyes
-    $(this).attr('href', atob('bWFpbHRvOm1lQHNoYXducmllZ2VyLmNvbQ=='));
+  // Get the width of the scrollbar (thanks so!)
+  var getScrollbarSize = function() {
+    var scrollDiv = document.createElement('div');
+    scrollDiv.style.cssText = 'width: 99px; height: 99px; overflow: scroll; position: absolute; top: -9999px;';
+    document.body.appendChild(scrollDiv);
+    var scrollbarSize = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+    document.body.removeChild(scrollDiv);
+    return scrollbarSize;
+  };
+
+
+  // hide contact link not a perfect solution but its enough for my purposes.
+  $('.footer a.peek')
+    .click(function() { $(this).attr('href', atob(shawnRieger.contact)); })
+    .focusout(function() { $(this).attr('href', '#'); });
+
+
+  // track links tagged with .track-link
+  mixpanel.track_links('.track-link', 'link-clicked'); // eslint-disable-line
+  $('button[data-name]').click(function(){
+    mixpanel.track('button-clicked', { 'button-name' : $(this).data('name') }); // eslint-disable-line
   });
-  $('.footer a.peek').focusout(function(){
-    // when the link looses focus, put the hash back.
-    $(this).attr('href', '#');
+
+
+
+  // TO TOP ARROW START -------------------------------------------------------
+  var $tta = $('.to-top-arrow');
+
+  var positionTopArrow = function inv() {
+    var secOffsetLeft = $('section').first().offset().left;
+    var rightPos = (secOffsetLeft < 45) ? '10px' : (secOffsetLeft-45) + 'px';
+    $tta.css({right: rightPos, top: '80px'});
+    return inv;
+  }();
+
+  var toggleTopArrow = function inv() {
+    var yoffset = window.pageYOffset;
+    var isVisible = $('.to-top-arrow').is(':visible');
+    if ( (yoffset >= 100 && !isVisible) || (yoffset < 100 && isVisible) ) {
+      $tta.toggle();
+    }
+    return inv;
+  }();
+
+  // scroll to top button
+  $tta.click(function(){
+    $(this).fadeOut();
+    scrollToObject($('#main'));
   });
 
+  // positionTopArrow();
+  $(window).on('scroll.toTopArrow', toggleTopArrow);
+  $(window).on('resize.toTopArrow', positionTopArrow);
+  // ------------------------------------------------------- TO TOP ARROW START
+
+
+
+  // SCROLLSPY START ----------------------------------------------------------
+  // Gets the offset top position for each section tag
+  var getSectionOffsets = function() {
+    var locs = $('section').map(function(){
+      return {
+        id: $(this).attr('id'),
+        pos: Math.floor($(this).offset().top)
+      };
+    });
+    return locs.get();
+  };
+
+  // resizing can push elements up and down the page, we'll recalculate
+  $(window).resize(function(){
+    shawnRieger.sections.loc = getSectionOffsets();
+  });
+
+  $(window).on('scroll.scrollSpy', function() {
+    // do nothing if scrollSpy is off
+    if (!shawnRieger.scrollSpy) return;
+
+    // lets see what section we are currently in
+    var curSec = shawnRieger.sections.loc.reduce(function(last, loc) {
+      if ((window.pageYOffset + 50) > loc.pos) return loc.id;
+      return last;
+    }, '');
+
+    if (curSec !== shawnRieger.sections.current) {
+      $('#main-nav ul li').removeClass('active');
+      $('.nav-item-' + curSec).addClass('active');
+      shawnRieger.sections.current = curSec;
+    }
+  });
+  // ------------------------------------------------------------ SCROLLSPY END
+
+
+
+  // LIGHTBOX START -----------------------------------------------------------
+  $(document).on('click.lightbox', '.gallery-item', function() {
+    // set image
+    var $img = $(this).children().first();
+    var src = $img.data('large') || $img.attr('src');
+    $('#lightbox img').attr('src', src);
+
+    // adjust for a clean look
+    var rPad = getScrollbarSize() +'px';
+    $('body').css({overflow: 'hidden', paddingRight: rPad});
+    $('nav.navbar').css({paddingRight: rPad});
+
+    // show the lightbox
+    $('#lightbox').fadeIn('slow');
+
+    // track mixpanel event
+    mixpanel.track('photo-clicked', { // eslint-disable-line
+      'photo-name' : src.match(/[^\/]+$/)[0]
+    });
+  });
 
   // closing the lightbox, any click will close
   $('#lightbox').click(function(){
     $('body, nav.navbar').removeAttr('style');
     $(this).fadeOut('slow');
-    $(window).off('scroll.lightbox');
     $('#lightbox img').attr('src', '');
+  }).contextmenu(function(e) {
+    e.preventDefault();
   });
+  // ------------------------------------------------------------- LIGHTBOX END
 
 
-  // smooth scroll from navigation
-  $('.navbar-nav li a').click(function(){
-    // we are only handling this on the homepage
-    if (atHome) {
-      // avoid the ui glitch when scrollspy is on, set active class manually here
-      scrollSpy = false;
+
+  // NAVIGATION START ---------------------------------------------------------
+  // set .active on manu items
+  $('.navbar-nav li a').on('click', function(){
+    if (shawnRieger.atHome) { // only on main page
       $('#main-nav ul li').removeClass('active');
       $(this).parent().addClass('active');
-
-      // remove leading slash
-      var id = $(this).attr('href').slice(1);
-      // scroll page to the desired section
-      scrollToObject( $(id), {callback: function(){
-        // turn scrollspy back on
-        scrollSpy = true;
-      }} );
+      var id = $(this).attr('href').slice(1); // remove leading slash
+      scrollToObject($(id));
     }
   });
 
-
-  // scroll to top button
-  // when users click the arrow, they are transported back to the top of the page
-  $('.to-top-arrow').click(function(){
-    // scroll to top of #main div
-    scrollToObject($('#main'));
-    // hide the arrow until next time
-    $(this).hide();
+  // close collapsed nav on click
+  $(document).on('click','.navbar-collapse.collapse.in a',function() {
+    $('#main-nav').collapse('hide');
   });
+  // ----------------------------------------------------------- NAVIGATION END
 
 
-  // monitor window resize, we'll need to reposition the scroll to top arrow
-  $(window).resize(function(){
-    // resizing can push elements up and down the page, we'll recalculate
-    // their positions first
-    sections.loc = getSectionOffsets();
-    // get left offset from top section
-    var secOffsetLeft = $('section').first().offset().left;
-    // depending on how condesned the window is, we'll place the arrow just off
-    // the window edge or just of the section edge
-    var rightPos = (secOffsetLeft < 45) ? '10px' : (secOffsetLeft-45) + 'px';
-    $('.to-top-arrow').css({right: rightPos, top: '80px'});
-  });
 
-
-  // Handle everything that requires scroll position here
-  $(window).scroll(function(){
-
-    // to top arrow visibility
-    var yoffset = window.pageYOffset;
-    var isVisible = $('.to-top-arrow').is(':visible');
-    // toggle visiblity of our 'back to top' arrow
-    if ( (yoffset >= 100 && !isVisible) || (yoffset < 100 && isVisible) ) {
-      $('.to-top-arrow').toggle();
-    }
-
-    // ScrollSpy
-    // ############################
-    if (scrollSpy) {
-      var curSec = ''; // current section
-      // itterate through each section
-      for (var i = 0; i < sections.loc.length; i++) {
-        // if section position is greater than current offset + header
-        if ((window.pageYOffset + 50) > sections.loc[i].pos) {
-          curSec = sections.loc[i].id; // update current section
-        }
-      }
-      // if curSec is different from the last spyed location, update
-      if (curSec !== sections.current) {
-        // remove all active classes from nav links
-        $('#main-nav ul li').removeClass('active');
-        // update last spyed location and add active class.
-        sections.current = curSec;
-        // location.assign('#' + curSec);
-        $('.nav-item-' + sections.current).addClass('active');
-      }
-    }
-  });
-
-
-  //  ========================
-  //  START MASONRY PHOTO GRID
-  //  ========================
-
-  // identify our grid to use with masonry
+  // PHOTOGRAPHY GRID START ---------------------------------------------------
   var $msnry = $('.photo-group');
-  // get our initial set of photos
   var $photos = photoBin.getPhotos(); // eslint-disable-line
-  // append photos to grid
+
   $msnry.append($photos);
 
-  // monitor first set of photos for load completion
   $photos.imagesLoaded().always( function() {
-    // images are loaded, lets initialize the grid
     $msnry.masonry({
       itemSelector: '.grid-item',
       columnWidth: '.grid-sizer',
       percentPosition: true
     });
-    // since we added page content, lets updated our section locations
-    sections.loc = getSectionOffsets();
+    shawnRieger.sections.loc = getSectionOffsets();
   });
 
   // load more images button
   $('.load-photos').click(function(){
-    // we are loading 6 photos, only need to scroll once
     var scrollOnce = false;
-    // load our next set of random photos
-    var $photos = photoBin.getPhotos(); // eslint-disable-line
-    // lets hide the photos before we append them
-    $photos.hide();
+    var $photos = photoBin.getPhotos().hide(); // eslint-disable-line
+
     $msnry.append($photos);
 
-    // we'll use imagesLoaded to see when each img if fully loaded
     $photos.imagesLoaded().progress( function( imgLoad, image ) {
-      // get the parent grid-item
       var $item = $(image.img).parents('.grid-item');
 
-      // images is loaded, we can show it and update masonry
       $item.show();
       $msnry.masonry( 'appended', $item );
 
       // we've added elements to the page, time to update our section locations
-      sections.loc = getSectionOffsets();
+      shawnRieger.sections.loc = getSectionOffsets();
 
       // scroll to the first new photo we load, no more
       if (!scrollOnce) {
         scrollOnce = true;
-        scrollToObject($item, {offset: 160});
+        scrollToObject($item, 160);
       }
     });
 
@@ -258,54 +232,6 @@ function main() {
     if (photoBin.photos.length < 1) // eslint-disable-line
       $(this).fadeOut();
   });
+  // --------------------------------------------------------- END MASONRY GRID
 
-  //  ======================
-  //  END MASONRY PHOTO GRID
-  //  ======================
-
-
-  // no right clicks
-  $('#lightbox').on('contextmenu', function(e) {
-    e.preventDefault();
-  });
-
-
-  // when we click on the collapsed nav, we need it to close
-  $(document).on('click','.navbar-collapse.collapse.in a',function() {
-    $('#main-nav').collapse('hide');
-  });
-
-  $(document).on('click', '.gallery-item', function() {
-    var $img = $(this).find('img').first();
-    var src = $img.data('large') || $img.attr('src');
-
-    $('#lightbox img').attr('src', src);
-
-    // track mixpanel event
-    src = src.replace(/\/$/, '').split('/');
-    mixpanel.track('photo-clicked', { 'photo-name' : src[src.length-1] }); // eslint-disable-line
-
-    var rPad = getScrollbarSize() +'px';
-
-    $('body').css({overflow: 'hidden', paddingRight: rPad});
-    $('nav.navbar').css({paddingRight: rPad});
-    $('#lightbox').fadeIn('slow');
-    var current = $(window).scrollTop();
-    $(window).on('scroll.lightbox', function() {
-      $(window).scrollTop(current);
-    });
-  });
-
-  mixpanel.track_links('.track-link', 'link-clicked'); // eslint-disable-line
-  $('button[data-name]').click(function(){
-    mixpanel.track('button-clicked', { 'button-name' : $(this).data('name') }); // eslint-disable-line
-  });
-
-
-  // lazy, fire this resize event to properly position our scroll to top arrow
-  window.dispatchEvent(new Event('resize'));
-}
-
-
-// go, go, go
-$('document').ready(main());
+});
