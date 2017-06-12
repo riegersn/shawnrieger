@@ -8,44 +8,30 @@
    * (/portfolio/pandora -> /portfolio.php?id=pandora)
    */
 
+  function getPortfolioItem($id) {
+    $file = json_decode(file_get_contents('portfolio.json'));
+    foreach ($file->portfolioItems as $index => $obj) {
+      if ($obj->id == $id) return $obj;
+    }
+    return false;
+  }
 
-  if (!isset($_GET['id']))
-    exit();
-
-  $id = $_GET['id'];
-
-  // TODO: move all portfolio info into JSON
-  $portfolio = array(
-    'pandora'       => 'Pandora Radio',
-    'mlb'           => 'MLB.TV',
-    'revision3'     => 'Revision3',
-    'suicidegirls'  => 'SuicideGirls',
-    'nhl'           => 'NHL.TV',
-    'ted'           => 'TED',
-    'gbtv'          => 'GBTV',
-    'accuweather'   => 'Accuweather'
-  );
-
-  // check for valid proj id
-  if (!isset($portfolio[$id]))
-    exit();
+  if (!isset($_GET['id'])) exit();
+  if (!$portfolio = getPortfolioItem( $_GET['id'] )) exit();
 
   // get proj title, splash & create screenshot array
-  $title   = $portfolio[$id];
-  $splash  = '/img/portfolio/' . $id . '/' . $id . '_splash.jpg';
+  $splash  = '/img/portfolio/' . $portfolio->id . '/' . $portfolio->id . '_splash.jpg';
   $screens = [];
 
   // scan proj img dir for files
-  $files = scandir('./img/portfolio/' . $id);
-
-  // filter only screenshot files and add them to our array
+  $files = scandir('./img/portfolio/' . $portfolio->id);
   foreach ($files as $file) {
     if ( strpos($file, '_screen_') !== false )
       $screens[] = $file;
   }
 
   // set the page title
-  $_SESSION['title'] = 'Shawn Rieger | Portfolio | ' . $title;
+  $_SESSION['title'] = 'Shawn Rieger | Portfolio | ' . $portfolio->name;
 
 ?>
 
@@ -69,23 +55,68 @@
         <ol class="breadcrumb">
           <li><a href="/">Home</a></li>
           <li><a href="/#portfolio">Portfolio</a></li>
-          <li class="active"><?=$title?></li>
+          <li class="active"><?=$portfolio->name?></li>
         </ol>
-        <h3><?=$title?></h3>
 
-        <!-- include specified portfolio page text -->
-        <?php include 'parts/portfolio/' . $id . '.php'; ?>
+        <!-- Project Name -->
+        <h3><?=$portfolio->name?></h3>
+
+        <!-- Company Info -->
+        <?php if ($portfolio->aboutCompany) { ?>
+          <hr><p><?=$portfolio->aboutCompany?></p>
+        <?php } ?>
+
+        <!-- Project Info -->
+        <?php if ($portfolio->aboutProject) { ?>
+          <hr><p><?=$portfolio->aboutProject?></p>
+        <?php } ?>
+
+        <!-- Feature List -->
+        <?php if ($portfolio->features) { ?>
+          <hr><ul>
+            <?php foreach ($portfolio->features as $key => $value) { ?>
+              <li><?=$value?></li>
+            <?php } ?>
+          </ul>
+        <?php } ?>
+
+        <!-- Feature List -->
+        <?php if ($portfolio->features) { ?>
+          <hr><h3><small>Application Features</small></h3><ul>
+            <?php foreach ($portfolio->features as $key => $value) { ?>
+              <li><?=$value?></li>
+            <?php } ?>
+          </ul>
+        <?php } ?>
+
+        <!-- Languages -->
+        <?php if ($portfolio->lang) { ?>
+          <hr><ul class="list-inline">
+            <?php foreach ($portfolio->lang as $key => $value) { ?>
+              <li><code><?=$value?></code></li>
+            <?php } ?>
+          </ul>
+        <?php } ?>
+
+        <!-- Github Link -->
+        <?php if ($portfolio->git) { ?>
+          <hr><ul class="list-inline">
+            <li><a class="track-link" href="<?=$portfolio->git?>" target="_blank"><img class="git-icon" src="/img/general/github.png" alt="">View on Github</a></li>
+          </ul>
+        <?php } ?>
 
         <!-- portfolio proj images, auto populated from *_screen_* files in the img dir -->
-        <div class="row gallery">
-          <?php foreach ($screens as $filename) { ?>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-              <a class="thumbnail gallery-item">
-                <img src="/img/portfolio/<?=$id?>/<?=$filename?>">
-              </a>
-            </div>
-          <?php } ?>
-        </div>
+        <?php if ($screens) { ?>
+          <hr><div class="row gallery">
+            <?php foreach ($screens as $filename) { ?>
+              <div class="col-xs-12 col-sm-6 col-md-4">
+                <a class="thumbnail gallery-item">
+                  <img src="/img/portfolio/<?=$portfolio->id?>/<?=$filename?>">
+                </a>
+              </div>
+            <?php } ?>
+          </div>
+        <?php } ?>
 
       </div> <!-- .content -->
     </section> <!-- #showcase -->
