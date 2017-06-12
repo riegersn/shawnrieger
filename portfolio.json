@@ -1,0 +1,94 @@
+{
+  "portfolioItems": [{
+      "id": "pandora",
+      "name": "Pandora Radio",
+      "git": "https://github.com/riegersn/pandora-btv",
+      "lang": ["JavaScript", "QML"],
+      "features": [
+        "Basics. Full play, pause, skip support.",
+        "Thumbs up/down support &amp; tracking.",
+        "Station creation from currently playing artist, track, song, and search.",
+        "Station deletion.",
+        "Full search. Artist, album, song.",
+        "Skip tracking. Implementing Pandora's skipping rules.",
+        "Pandora ad support.",
+        "Device linking between the Boxee TV device and the Pandora service.",
+        "Pandora user account authentication."
+      ],
+      "aboutCompany": "Pandora Internet Radio (also known as Pandora Radio or simply Pandora) is a music streaming and automated music recommendation service powered by the Music Genome Project. The service, operated by Pandora Media, Inc., is available only in Australia, New Zealand, and the United States. The service plays musical selections of a certain genre based on the user's artist selection. The user then provides positive or negative feedback (as \"thumbs up\" or \"thumbs down\") for songs chosen by the service, and the feedback is taken into account in the subsequent selection of other songs to play.",
+      "aboutProject": "<p>I was tasked with building a fully functional Pandora application for the Boxee TV using JavaScript and QML. The functional design was straight forward, as we were working off a similar design from an older version of Pandora that ran on the original Boxee Box. The old design ran in a 720p environment while the new one would need to support 1080p, so the graphical assets had to be recreated by our graphics designer.</p> <p>With my new assets in hand, I got to work building the initial structure. The entire app would be contained within a single window with panels that (I referenced as 'blades') would slide up over the main control blade which always remained open during normal operation.</p>"
+    },
+    {
+      "id": "mlb",
+      "name": "MLB.TV",
+      "git": "https://github.com/riegersn/mlb-btv",
+      "lang": ["XUL", "Python", "PHP"],
+      "features": [
+        "Daily schedules with live scores.",
+        "Playback of both home &amp; away video streams.",
+        "Audio selection, when available, for each stream. (radio, ballpark only...).",
+        "Caleder view showing past &amp; future games.",
+        "Sandings view of current leauge stadings for all teams.",
+        "Ability to select your favorite team(s).",
+        "Set score visibility on, off, or only off for your favorite teams' scores.",
+        "Video quality could be set to HD, SD or Adaptive based on your connection."
+      ],
+      "aboutCompany": "MLB.tv is an American subscription based audio and video service which through two different service tiers allows users to hear and watch HD quality Major League Baseball games live via a high-speed Internet connection. Watch every out-of-market regular season game live or on demand on your favorite supported devices. Subscribers receive In-Game highlights and stats, Live game DVR control, Full Game Archives, Audio overlay (Away radio audio overlay is available to MLB.tv Premium subscribers only), Pitch by Pitch widget, Clickable linescores and Fantasy player tracker.",
+      "aboutProject": "<p>When I was tasked with building a new MLB.TV application, I was estatic. I love the sport and was thrilled to updated my older, and outdated application I previously built for the original Boxee Box. I was also able to work with the same team from MLB which was great.</p> <p>MLB.TV utilized HLS (HTTP Live Streaming). developed by Apple in 2009. This gave them the ability to steam live video in stunning hd quality, far exceeding any technology that has come before it. Similar to my <a href=\"/portfolio/pandora\">Pandora</a> application, I utilized <code>JavaScript</code> &amp; <code>QML</code> to acheave a beautiful final result. Unfortunately due to time restrictions and client limitations some more advaced features of MLB.TV such as multi-game view where not possible.</p>"
+    },
+    {
+      "id": "revision3",
+      "name": "Revision3",
+      "git": "https://github.com/riegersn/revision3-btv",
+      "lang": ["XUL", "Python", "PHP", "Photoshop"],
+      "features": [],
+      "aboutCompany": "Revision3 was a San Francisco-based multi-channel Internet television network that creates, produces and distributes Web television shows on niche topics. Founded in 2005, it has been operating as a subsidiary of Discovery Digital Networks since 2012. The network has primarily technology-based shows hosted and produced by Patrick Norton, and gaming shows hosted and produced by Adam Sessler.",
+      "aboutProject": "<p>The Revision3 application was a straight forward, one 'page' application designed myself from the ground up. It featured 2 rows with a hidden 3<sup>rd</sup> that was only visible when selecting a series title.</p> The top row was a 'jumbotron' or 'showcase' list that contained featured episodes and videos. The video thumbnails would slide from side to side depending on which direction you'd press the remote, the focus would always remain centered.</p> <p>The 2<sup>nd</sup> row contained all available Revision3 series. The entire list would shift from right to left while focus remained centered similarly to the featured shows. When you clicked the select button on the remote, the entire screen would slide up to reveal that series episodes.</p> <p>I've always been a fan and big supporter of Revision3 and all of the <a href=\"https://en.wikipedia.org/wiki/TechTV\" target=\"_blank\">TechTV</a> guys, way back to the days of <a href=\"https://en.wikipedia.org/wiki/The_Screen_Savers\" target=\"_blank\">The Screen Savers</a> TV show. So I always made sure their content had a home at Boxee.</p>"
+    },
+    {
+      "id": "suicidegirls",
+      "name": "SuicideGirls",
+      "git": "https://github.com/riegersn/suicidegirls-bbx",
+      "lang": ["XUL", "Python", "PHP"],
+      "features": ["Cool pics.", "stuff."],
+      "aboutCompany": "SuicideGirls is an online community-based website that revolves around pin-up photography sets of models known as the Suicide Girls. The website was founded in 2001 by Selena Mooney (\"Missy Suicide\") and Sean Suhl (\"Spooky\"). Most of the site is only accessible to paying members. It offers members access to images provided by models and photographers worldwide, as well as personal profiles, blogging platforms and the option to join numerous groups based upon different interests. There is also an online merchandise store offering a range of clothing, books, and DVDs.",
+      "aboutProject": "<p>The SuicideGirls application was fun to build as the UI was designed to match the look &amp; feel of their brand (at that time). The app featured full SuicideGirls goodness with all the videos, models and photo sets your heart desired. Starting off with a free set of pics and videos, users could log in with their accounts directly inside the application and get access to all of the site's media content on a big screen TV. Browse through all the models and their photos, sort, and search, see the newest content and more.</p> <p>The app was officially demoed and launched at the Boxee Meetup NYC event at Webster Hall in Brooklyn NY to great applause, although some of the SuicideGirls were there on stage stealing the spotlight!</p>"
+    },
+    {
+      "id": "nhl",
+      "name": "NHL.TV",
+      "git": "https://github.com/riegersn/nhl-bbx",
+      "lang": ["XUL", "Python"],
+      "features": [],
+      "aboutCompany": "",
+      "aboutProject": "Details coming soon."
+    },
+    {
+      "id": "ted",
+      "name": "TED",
+      "git": "",
+      "lang": ["JavaScript", "QML", "PHP", "Photoshop"],
+      "features": [],
+      "aboutCompany": "",
+      "aboutProject": "Details coming soon."
+    },
+    {
+      "id": "gbtv",
+      "name": "GBTV",
+      "git": "",
+      "lang": ["XUL", "Python"],
+      "features": [],
+      "aboutCompany": "",
+      "aboutProject": "Details coming soon."
+    },
+    {
+      "id": "accuweather",
+      "name": "Accuweather",
+      "git": "https://github.com/riegersn/accuweather-btv",
+      "lang": ["QML", "JavaScript"],
+      "features": [],
+      "aboutCompany": "",
+      "aboutProject": "Details coming soon."
+    }
+  ]
+}
