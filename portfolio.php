@@ -129,8 +129,5 @@
   <!-- include footer -->
   <?php include 'parts/footer.php'; ?>
 
-  <!-- iclude our scripts -->
-  <?php include 'parts/scripts.php'; ?>
-
 </body>
 </html>

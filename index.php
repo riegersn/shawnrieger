@@ -34,17 +34,14 @@
 
 </div>
 
-  <!-- Include our footer -->
-  <?php include 'parts/footer.php'; ?>
-
   <!-- Include any components we want to add to the page  -->
   <?php
     include 'parts/components/lightbox.php';
     include 'parts/components/to-top-arrow.php';
   ?>
 
-  <!-- Include our default page scripts -->
-  <?php include 'parts/scripts.php'; ?>
+  <!-- Include our footer -->
+  <?php include 'parts/footer.php'; ?>
 
 </body>
 </html>
