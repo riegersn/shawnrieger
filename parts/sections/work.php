@@ -11,7 +11,7 @@
 ?>
 
 <section id="work">
-  <div class="header-image">
+  <div class="header-image work">
   </div>
   <div class="content">
     <h3 class="heading">work</h3>

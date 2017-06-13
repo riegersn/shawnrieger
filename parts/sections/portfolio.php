@@ -11,7 +11,7 @@
 ?>
 
 <section id="portfolio">
-  <div class="header-image"></div>
+  <div class="header-image portfolio"></div>
   <div class="content">
     <h3 class="heading">portfolio</h3>
     <div class="row">

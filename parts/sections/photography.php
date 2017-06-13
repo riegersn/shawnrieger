@@ -11,7 +11,7 @@
 ?>
 
 <section id="photography">
-  <div class="header-image"></div>
+  <div class="header-image photography"></div>
   <div class="content">
     <h3 class="heading">photography</h3>
     <div class="photo-group"></div>

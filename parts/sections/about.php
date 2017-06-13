@@ -11,7 +11,7 @@
 ?>
 
 <section id="about">
-  <div class="header-image">
+  <div class="header-image about">
   </div>
   <div class="content">
     <h3 class="heading">about me</h3>
