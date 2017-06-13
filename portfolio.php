@@ -114,10 +114,6 @@
     </section> <!-- #showcase -->
   </div> <!-- #main -->
 
-  <!-- include lightbox component -->
-  <?php include 'parts/components/lightbox.php'; ?>
-  <?php include 'parts/components/to-top-arrow.php'; ?>
-
   <!-- include footer -->
   <?php include 'parts/footer.php'; ?>
 
