@@ -31,7 +31,7 @@
   }
 
   // set the page title
-  $_SESSION['title'] = 'Shawn Rieger | Portfolio | ' . $portfolio->name;
+  $_SESSION['title'] = 'Shawn Rieger | Projects | ' . $portfolio->name;
 
 ?>
 
@@ -46,7 +46,7 @@
   <?php include 'parts/nav.php' ?>
 
   <div id="main">
-    <section id="showcase">
+    <section id="project">
 
       <!-- header splash, auto loaded from _splash file in the proj img dir -->
       <div class="header-image" style="background-image:url('<?=$splash?>')">

@@ -1,0 +1,42 @@
+#project {
+  .git-icon {
+    height: auto;
+    width: 24px;
+    margin-right: 8px;
+  }
+
+  .screenshot {
+    margin-bottom: 15px;
+    @media screen and (min-width: 768px) {
+      margin-bottom: 30px;
+    }
+  }
+
+  .header-image {
+    background-position: center center;
+  }
+
+  .nsfw {
+    position: relative;
+  }
+
+  .nsfw::after {
+    content: " ";
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+    top: 0;
+    left: 0;
+    margin: 5px;
+    position: absolute;
+    display: block;
+    background-image: url("../img/general/nsfw.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    transition: opacity 0.5s ease;
+  }
+
+  .nsfw:hover::after {
+    opacity: 0;
+  }
+}

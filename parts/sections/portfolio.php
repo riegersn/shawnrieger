@@ -19,7 +19,7 @@
     <div class="row">
       <?php foreach ($portfolio->portfolioItems as $project) { ?>
         <div class="col-xs-12 col-sm-6 col-md-4">
-          <a class="thumbnail" href="/portfolio/<?=$project->id?>">
+          <a class="thumbnail" href="/project/<?=$project->id?>">
             <div class="slider-img<?php if ($project->nsfw) echo ' nsfw'; ?>" style="background-image:url('<?=$project->thumb?>')">
             </div>
           </a>
