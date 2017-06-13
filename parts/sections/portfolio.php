@@ -8,6 +8,8 @@
    * Highlights my best work
    */
 
+   $portfolio = json_decode(file_get_contents('portfolio.json'));
+
 ?>
 
 <section id="portfolio">
@@ -15,32 +17,14 @@
   <div class="content">
     <h3 class="heading">portfolio</h3>
     <div class="row">
-      <?php
-        $outer_class = 'project';
-        $bs_col_class = 'col-xs-12 col-sm-6 col-md-4';
-        $thumb = '/img/portfolio/%s/%s_thumb.jpg';
-
-        $portfolio = array(
-          'pandora'       => 'Pandora Radio',
-          'mlb'           => 'MLB.TV',
-          'revision3'     => 'Revision3',
-          'suicidegirls'  => 'SuicideGirls',
-          'nhl'           => 'NHL.TV',
-          'ted'           => 'TED',
-          'gbtv'          => 'GBTV',
-          'accuweather'   => 'Accuweather'
-        );
-
-        foreach ($portfolio as $id => $name) {
-          $bg_img = sprintf($thumb, $id, $id);
-          echo "<div class=\"${bs_col_class}\">
-                  <a class=\"thumbnail\" href=\"/portfolio/${id}\">
-                    <div class=\"${outer_class} ${id}\" style=\"background-image:url('${bg_img}')\">
-                    </div>
-                  </a>
-                </div>";
-        }
-      ?>
+      <?php foreach ($portfolio->portfolioItems as $project) { ?>
+        <div class="col-xs-12 col-sm-6 col-md-4">
+          <a class="thumbnail" href="/portfolio/<?=$project->id?>">
+            <div class="slider-img<?php if ($project->nsfw) echo ' nsfw'; ?>" style="background-image:url('<?=$project->thumb?>')">
+            </div>
+          </a>
+        </div>
+      <?php } ?>
     </div>
   </div>
 </section>
