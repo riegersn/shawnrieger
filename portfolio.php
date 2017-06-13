@@ -71,14 +71,6 @@
           <hr><p><?=$portfolio->aboutProject?></p>
         <?php } ?>
 
-        <!-- Feature List -->
-        <?php if ($portfolio->features) { ?>
-          <hr><ul>
-            <?php foreach ($portfolio->features as $key => $value) { ?>
-              <li><?=$value?></li>
-            <?php } ?>
-          </ul>
-        <?php } ?>
 
         <!-- Feature List -->
         <?php if ($portfolio->features) { ?>
@@ -108,9 +100,9 @@
         <!-- portfolio proj images, auto populated from *_screen_* files in the img dir -->
         <?php if ($screens) { ?>
           <hr><div class="row gallery">
-            <?php foreach ($screens as $filename) { ?>
+            <?php foreach ($screens as $index => $filename) { ?>
               <div class="col-xs-12 col-sm-6 col-md-4">
-                <a class="thumbnail gallery-item">
+                <a class="thumbnail" href="/img/portfolio/<?=$portfolio->id?>/<?=$filename?>" data-fancybox="<?=$portfolio->id?>">
                   <img src="/img/portfolio/<?=$portfolio->id?>/<?=$filename?>">
                 </a>
               </div>

@@ -81,8 +81,9 @@ var photoBin = {
     while(numOfPhotos-- > 0) {
       var item = this.getRandomPhoto();
       if (item) {
-        photos += '<div class="grid-item grid-sizer gallery-item"><img src="'+
-                  item.small+'" data-large="'+item.large+'"></div>';
+        photos += '<div class="grid-item grid-sizer">'+
+          '<a href="'+item.large+'" data-fancybox="Photography">' +
+          '<img src="'+item.small+'"></a></div>';
       }
     }
 
