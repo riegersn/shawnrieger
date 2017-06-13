@@ -15,11 +15,11 @@
 <html lang="en">
 
 <!-- include header -->
-<?php include 'parts/header.php'; ?>
+<?php include '../header.php'; ?>
 
 <body>
   <!-- include navigation -->
-  <?php include 'parts/nav.php' ?>
+  <?php include '../nav.php' ?>
 
 <div id="main">
   <section>
@@ -100,7 +100,7 @@
 </div>
 
 <!-- Include the footer -->
-<?php include 'parts/footer.php'; ?>
+<?php include '../footer.php'; ?>
 
 </body>
 </html>

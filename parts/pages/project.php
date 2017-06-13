@@ -9,7 +9,7 @@
    */
 
   function getPortfolioItem($id) {
-    $file = json_decode(file_get_contents('portfolio.json'));
+    $file = json_decode(file_get_contents('../../portfolio.json'));
     foreach ($file->portfolioItems as $index => $obj) {
       if ($obj->id == $id) return $obj;
     }
@@ -24,7 +24,7 @@
   $screens = [];
 
   // scan proj img dir for files
-  $files = scandir('./img/portfolio/' . $portfolio->id);
+  $files = scandir('../../img/portfolio/' . $portfolio->id);
   foreach ($files as $file) {
     if ( strpos($file, '_screen_') !== false )
       $screens[] = $file;
@@ -39,11 +39,11 @@
 <html lang="en">
 
 <!-- include header -->
-<?php include 'parts/header.php'; ?>
+<?php include '../header.php'; ?>
 
 <body>
   <!-- include navigation -->
-  <?php include 'parts/nav.php' ?>
+  <?php include '../nav.php' ?>
 
   <div id="main">
     <section id="project">
@@ -115,7 +115,7 @@
   </div> <!-- #main -->
 
   <!-- include footer -->
-  <?php include 'parts/footer.php'; ?>
+  <?php include '../footer.php'; ?>
 
 </body>
 </html>
