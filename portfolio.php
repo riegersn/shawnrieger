@@ -102,8 +102,8 @@
           <hr><div class="row gallery">
             <?php foreach ($screens as $index => $filename) { ?>
               <div class="col-xs-12 col-sm-6 col-md-4">
-                <a class="thumbnail" href="/img/portfolio/<?=$portfolio->id?>/<?=$filename?>" data-fancybox="<?=$portfolio->id?>">
-                  <img src="/img/portfolio/<?=$portfolio->id?>/<?=$filename?>">
+                <a class="thumbnail<?php if ($portfolio->nsfw) echo ' nsfw' ?>" href="/img/portfolio/<?=$portfolio->id?>/<?=$filename?>" data-fancybox="<?=$portfolio->id?>">
+                    <img src="/img/portfolio/<?=$portfolio->id?>/<?=$filename?>">
                 </a>
               </div>
             <?php } ?>
