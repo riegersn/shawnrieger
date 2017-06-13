@@ -2,7 +2,9 @@
   "portfolioItems": [{
       "id": "pandora",
       "name": "Pandora Radio",
+      "nsfw": false,
       "git": "https://github.com/riegersn/pandora-btv",
+      "thumb": "/img/portfolio/pandora/pandora_thumb.jpg",
       "lang": ["JavaScript", "QML"],
       "features": [
         "Basics. Full play, pause, skip support.",
@@ -21,7 +23,9 @@
     {
       "id": "mlb",
       "name": "MLB.TV",
+      "nsfw": false,
       "git": "https://github.com/riegersn/mlb-btv",
+      "thumb": "/img/portfolio/mlb/mlb_thumb.jpg",
       "lang": ["XUL", "Python", "PHP"],
       "features": [
         "Daily schedules with live scores.",
@@ -40,6 +44,7 @@
       "id": "revision3",
       "name": "Revision3",
       "git": "https://github.com/riegersn/revision3-btv",
+      "thumb": "/img/portfolio/revision3/revision3_thumb.jpg",
       "lang": ["XUL", "Python", "PHP", "Photoshop"],
       "features": [],
       "aboutCompany": "Revision3 was a San Francisco-based multi-channel Internet television network that creates, produces and distributes Web television shows on niche topics. Founded in 2005, it has been operating as a subsidiary of Discovery Digital Networks since 2012. The network has primarily technology-based shows hosted and produced by Patrick Norton, and gaming shows hosted and produced by Adam Sessler.",
@@ -48,16 +53,20 @@
     {
       "id": "suicidegirls",
       "name": "SuicideGirls",
+      "nsfw": true,
       "git": "https://github.com/riegersn/suicidegirls-bbx",
+      "thumb": "/img/portfolio/suicidegirls/suicidegirls_thumb.jpg",
       "lang": ["XUL", "Python", "PHP"],
-      "features": ["Cool pics.", "stuff."],
+      "features": [],
       "aboutCompany": "SuicideGirls is an online community-based website that revolves around pin-up photography sets of models known as the Suicide Girls. The website was founded in 2001 by Selena Mooney (\"Missy Suicide\") and Sean Suhl (\"Spooky\"). Most of the site is only accessible to paying members. It offers members access to images provided by models and photographers worldwide, as well as personal profiles, blogging platforms and the option to join numerous groups based upon different interests. There is also an online merchandise store offering a range of clothing, books, and DVDs.",
       "aboutProject": "<p>The SuicideGirls application was fun to build as the UI was designed to match the look &amp; feel of their brand (at that time). The app featured full SuicideGirls goodness with all the videos, models and photo sets your heart desired. Starting off with a free set of pics and videos, users could log in with their accounts directly inside the application and get access to all of the site's media content on a big screen TV. Browse through all the models and their photos, sort, and search, see the newest content and more.</p> <p>The app was officially demoed and launched at the Boxee Meetup NYC event at Webster Hall in Brooklyn NY to great applause, although some of the SuicideGirls were there on stage stealing the spotlight!</p>"
     },
     {
       "id": "nhl",
       "name": "NHL.TV",
+      "nsfw": false,
       "git": "https://github.com/riegersn/nhl-bbx",
+      "thumb": "/img/portfolio/nhl/nhl_thumb.jpg",
       "lang": ["XUL", "Python"],
       "features": [],
       "aboutCompany": "",
@@ -66,7 +75,9 @@
     {
       "id": "ted",
       "name": "TED",
+      "nsfw": false,
       "git": "",
+      "thumb": "/img/portfolio/ted/ted_thumb.jpg",
       "lang": ["JavaScript", "QML", "PHP", "Photoshop"],
       "features": [],
       "aboutCompany": "",
@@ -75,7 +86,9 @@
     {
       "id": "gbtv",
       "name": "GBTV",
+      "nsfw": false,
       "git": "",
+      "thumb": "/img/portfolio/gbtv/gbtv_thumb.jpg",
       "lang": ["XUL", "Python"],
       "features": [],
       "aboutCompany": "",
@@ -84,7 +97,9 @@
     {
       "id": "accuweather",
       "name": "Accuweather",
+      "nsfw": false,
       "git": "https://github.com/riegersn/accuweather-btv",
+      "thumb": "/img/portfolio/accuweather/accuweather_thumb.jpg",
       "lang": ["QML", "JavaScript"],
       "features": [],
       "aboutCompany": "",
