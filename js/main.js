@@ -36,7 +36,7 @@ $(function(){
     if (typeof $object === 'object' && typeof $object.offset === 'function') {
       shawnRieger.scrollSpy = false; // we don't want this active while animating
       $('html,body').finish().animate({
-        scrollTop: $object.offset().top - (offset || 0)
+        scrollTop: $object.offset().top - 50 - (offset || 0)
       }, 750, function() {
         shawnRieger.scrollSpy = true;
       });
@@ -113,7 +113,7 @@ $(function(){
 
     // lets see what section we are currently in
     var curSec = shawnRieger.sections.loc.reduce(function(last, loc) {
-      if ((window.pageYOffset + 50) > loc.pos) return loc.id;
+      if ((window.pageYOffset + 55) > loc.pos) return loc.id;
       return last;
     }, '');
 
@@ -180,7 +180,7 @@ $(function(){
       // scroll to the first new photo we load, no more
       if (!scrollOnce) {
         scrollOnce = true;
-        scrollToObject($item, 160);
+        scrollToObject($item, 75);
       }
     });
 
