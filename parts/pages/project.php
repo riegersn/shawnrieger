@@ -21,7 +21,7 @@
 
   // get proj title, splash & create screenshot array
   $splash  = '/img/portfolio/' . $portfolio->id . '/' . $portfolio->id . '_splash.jpg';
-  $screens = [];
+  $screens = array();
 
   // scan proj img dir for files
   $files = scandir('../../img/portfolio/' . $portfolio->id);
