@@ -44,17 +44,6 @@ $(function(){
   };
 
 
-  // Get the width of the scrollbar (thanks so!)
-  var getScrollbarSize = function() {
-    var scrollDiv = document.createElement('div');
-    scrollDiv.style.cssText = 'width: 99px; height: 99px; overflow: scroll; position: absolute; top: -9999px;';
-    document.body.appendChild(scrollDiv);
-    var scrollbarSize = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-    document.body.removeChild(scrollDiv);
-    return scrollbarSize;
-  };
-
-
   // hide contact link not a perfect solution but its enough for my purposes.
   $('.footer a.peek')
     .click(function() { $(this).attr('href', atob(shawnRieger.contact)); })
@@ -135,39 +124,6 @@ $(function(){
     }
   });
   // ------------------------------------------------------------ SCROLLSPY END
-
-
-
-  // LIGHTBOX START -----------------------------------------------------------
-  $(document).on('click.lightbox', '.gallery-item', function() {
-    // set image
-    var $img = $(this).children().first();
-    var src = $img.data('large') || $img.attr('src');
-    $('#lightbox img').attr('src', src);
-
-    // adjust for a clean look
-    var rPad = getScrollbarSize() +'px';
-    $('body').css({overflow: 'hidden', paddingRight: rPad});
-    $('nav.navbar').css({paddingRight: rPad});
-
-    // show the lightbox
-    $('#lightbox').fadeIn('slow');
-
-    // track mixpanel event
-    mixpanel.track('photo-clicked', { // eslint-disable-line
-      'photo-name' : src.match(/[^\/]+$/)[0]
-    });
-  });
-
-  // closing the lightbox, any click will close
-  $('#lightbox').click(function(){
-    $('body, nav.navbar').removeAttr('style');
-    $(this).fadeOut('slow');
-    $('#lightbox img').attr('src', '');
-  }).contextmenu(function(e) {
-    e.preventDefault();
-  });
-  // ------------------------------------------------------------- LIGHTBOX END
 
 
 
