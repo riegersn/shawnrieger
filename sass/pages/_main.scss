@@ -1,0 +1,144 @@
+.header-image {
+  &.about {
+    background-image: url('../img/sections/about.jpg');
+  }
+
+  &.work {
+    background-image: url("../img/sections/work.jpg");
+    background-position: left top;
+  }
+
+  &.portfolio {
+    background-image: url("../img/portfolio/pandora/pandora_screen_01.jpg");
+    background-position: left top;
+  }
+
+  &.photography {
+    background-image: url("../img/photography/large/20140404123054_l.jpg");
+    background-position: center center;
+  }
+}
+
+.image-group {
+  li {
+    padding: 13px;
+  }
+
+  img {
+    max-width: 125px;
+    max-height: 65px;
+  }
+}
+
+.slider-img {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding-bottom: (276/504) * 100%;
+  background-size: 0;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: -100%;
+    top: 0;
+    width: 200%;
+    height: 100%;
+    background: {
+      position: left center;
+      repeat: repeat-x;
+      size: contain;
+      image: inherit;
+    }
+    transform-style: preserve-3d; // thanks stackoverflow!
+    transition: transform 0.2s ease-out;
+  }
+
+  &:hover::before {
+    transform: translateX(50%);
+  }
+
+  &.nsfw::after {
+    content: ' ';
+    position: absolute;
+    top: 0;
+    right: 0;
+    @media screen and (min-width: 768px) {
+      right: -55px;
+    }
+    width: 100%;
+    height: 100%;
+    background-image: url('/img/general/nsfw_badge.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    transition: right 0.3s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  }
+
+  &.nsfw:hover::after {
+    right: 0;
+  }
+}
+
+.photo-group {
+  margin-left: 1%;
+
+  .grid-sizer {
+    box-sizing: border-box;
+    float: left;
+    opacity: 0.8;
+    transition: opacity 0.25s ease-in-out;
+    @include grid-spacing(2, 1%);
+    @media screen and (min-width: 768px) {
+       @include grid-spacing(3, 1%);
+    }
+
+    &:hover {
+      opacity: 1;
+      cursor: pointer;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+.load-photos {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+#resume {
+  hr:first-of-type {
+    margin-top: 12px;
+  }
+
+  ul {
+    margin-bottom: 15px;
+  }
+
+  h4 {
+    font-weight: 100;
+    margin-bottom: 10px;
+  }
+
+  h5 {
+    font-weight: 100;
+    margin-bottom: 6px;
+
+    small {
+      font-size: 85% !important;
+    }
+  }
+
+  h6 {
+    font-weight: 100;
+    margin: 10px 0 5px 23px;
+  }
+}
+
+.resume-download-btn {
+  margin-top: 15px;
+}

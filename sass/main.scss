@@ -1,80 +1,11 @@
 // main.scss
 @import "mixins";
+
 @import "partials/_base";
 @import "partials/_nav";
-@import "partials/_photogrid";
-@import "partials/_portfolio";
 
-@import "partials/_showcase";
+@import "pages/_main";
+@import "pages/_project";
 
-@import "partials/_resume";
+
 @import "partials/_footer";
-
-section {
-  max-width: 1024px;
-  margin: 0 auto;
-  padding-top: 50px;
-  .header-image {
-    width: 100%;
-    height: 450px;
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  .content {
-    padding: 10px 20px;
-    @media screen and (min-width: 768px) { padding: 15px 40px; }
-    background-color: $white;
-  }
-}
-
-.navbar {
-  .content {
-    margin: 0 auto;
-    max-width: 1024px;
-  }
-}
-
-#about .header-image {
-  background-image: url("../img/sections/about.jpg"); }
-#work .header-image {
-  background-image: url("../img/sections/work.jpg");
-  background-position: left top; }
-#portfolio .header-image {
-  background-image: url("../img/portfolio/pandora/pandora_screen_01.jpg");
-  background-position: left top; }
-#photography .header-image {
-  background-image: url("../img/photography/large/20140404123054_l.jpg");
-  background-position: center center; }
-
-.to-top-arrow {
-  display: none;
-  position: fixed;
-  top: 80px;
-  right: 10px;
-  width: 30px;
-  height: 49px;
-  opacity: .2;
-  cursor: pointer;
-  transition: opacity .25s;
-  background-image: url("../img/general/to-top-arrow.png");
-  &:hover {
-    opacity: .7;
-  }
-}
-
-.image-group {
-  li { padding: 13px; }
-  img {
-    max-width: 110px;
-    max-height: 50px;
-  }
-}
-
-.image-group-large {
-  li { padding: 16px; }
-  img {
-    max-width: 140px;
-    max-height: 80px;
-  }
-}

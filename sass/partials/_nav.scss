@@ -1,12 +1,18 @@
 .navbar {
   background-color: $white;
   border: none;
+
   .navbar-brand {
     font-size: 1.2em;
     color: $black;
     font-family: $_font_heading;
     text-transform: uppercase;
     line-height: 23px;
+  }
+
+  .content {
+    margin: 0 auto;
+    max-width: 1024px;
   }
 }
 
@@ -15,7 +21,9 @@
 }
 
 .navbar-default .navbar-nav .active {
-  a,a:hover,a:focus {
+  a,
+  a:focus,
+  a:hover {
     color: $white;
     background-color: $blue;
   }
@@ -23,15 +31,21 @@
 
 .navbar-nav a {
   color: $black;
-  &:focus, &:hover {
-    background-color: $nav-hover; }
+
+  &:focus,
+  &:hover {
+    background-color: $nav-hover;
+  }
 }
 
 .navbar-toggle {
   background-color: $white;
-  &:focus,&:hover {
-    background-color: $nav-hover
+
+  &:focus,
+  &:hover {
+    background-color: $nav-hover;
   }
+
   .icon-bar {
     background-color: $black;
   }
