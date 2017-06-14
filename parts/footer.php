@@ -44,7 +44,7 @@
       </div>
       <div class="col-xs-12 col-sm-5 text-center">
         <h4 class="links-header"><small>made with</small><img class="love" src="/img/general/love.png" alt="LOVE"></h4>
-        <img class="made-with" src="/img/general/built-with.png" alt="Built with Bootstrap, jQuery, Sass, Gulp, and NodeJS">
+        <img class="made-with" src="/img/general/builtwith.png" alt="Built with Bootstrap, jQuery, Sass, Gulp, and NodeJS">
       </div>
       <div class="col-xs-12 text-center">
         <h4 class="copy-notice"><small>&copy; 2017 Shawn Rieger &mdash; All Rights Reserved.</small></h4>
@@ -59,6 +59,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.0/masonry.pkgd.min.js" integrity="sha256-YFADoQJIYFj+isdXssMGUrmsVNbVDfN5m8jPgVN+9m4=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.2/imagesloaded.min.js" integrity="sha256-VC4gpGBDKiyXJhHygvqwm6pHHF11cmXTXal2qHqTMmA=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<!-- don't let fonts block -->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans|Rubik:500" rel="stylesheet">
 
 <!-- don't let fancybox block -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous" />
