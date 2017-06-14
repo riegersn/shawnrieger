@@ -58,3 +58,24 @@ gulp.task('watch-browser', ['sass', 'browser-sync'], function () {
   gulp.watch('js/**/*.js', [bs.reload]);
   gulp.watch('sass/**/*.scss', ['sass']);
 });
+
+
+gulp.task('build', ['sass', 'js'], function() {
+  gulp.src(['./.htaccess', './index.php', './portfolio.json'])
+    .pipe(gulp.dest('./build'));
+
+  gulp.src('./style/main.css')
+    .pipe(gulp.dest('./build/style'));
+
+  gulp.src('./js/main.min.js')
+    .pipe(gulp.dest('./build/js'));
+
+  gulp.src('./downloads/*')
+    .pipe(gulp.dest('./build/downloads'));
+
+  gulp.src('./img/**/*')
+    .pipe(gulp.dest('./build/img'));
+
+  gulp.src('./parts/**/*')
+    .pipe(gulp.dest('./build/parts'));
+});
