@@ -1,20 +1,20 @@
 .header-image {
   &.about {
-    background-image: url('../img/sections/about.jpg');
+    background-image: url('../img/sections/about_home.jpg');
   }
 
   &.work {
-    background-image: url("../img/sections/work.jpg");
+    background-image: url("../img/sections/work_home.jpg");
     background-position: left top;
   }
 
   &.portfolio {
-    background-image: url("../img/portfolio/pandora/pandora_screen_01.jpg");
+    background-image: url("../img/sections/portfolio_home.jpg");
     background-position: left top;
   }
 
   &.photography {
-    background-image: url("../img/photography/large/20140404123054_l.jpg");
+    background-image: url("../img/sections/photography_home.jpg");
     background-position: center center;
   }
 }
