@@ -1,10 +1,17 @@
+<IfModule mod_headers.c>
+    <FilesMatch "\.(jpg|jpeg|png|gif|swf)$">
+        Header set Cache-Control "max-age=2592000"
+    </FilesMatch>
+
+    <FilesMatch "\.(js|css|swf)$">
+        Header set Cache-Control "max-age=2592000"
+    </FilesMatch>
+</IfModule>
+
 RewriteEngine On
+
 RewriteCond %{REQUEST_FILENAME} !-f
-#RewriteRule ^([^/]+)/$ $1.php
-#RewriteRule ^([^/]+)/([^/]+)/$ /$1/$2.php
-RewriteRule ^privacy-policy/$ /parts/pages/privacy-policy.php
-RewriteRule ^project/([^/]+)/$ /parts/pages/project.php?id=$1
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI} !(\.[a-zA-Z0-9]{1,5}|/)$
-RewriteRule (.*)$ /$1/ [R=301,L]
+RewriteRule [^/]$ %{REQUEST_URI}/ [L,R=301,NE]
+
+RewriteRule ^privacy-policy/$ /parts/pages/privacy-policy.php [L,NC]
+RewriteRule ^project/([^/]+)/$ /parts/pages/project.php?id=$1 [L,NC,QSA]
