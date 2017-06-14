@@ -20,6 +20,12 @@ $(function(){
     sections: {
       loc: [],
       current: 'about'
+    },
+    noblock: {
+      css: [{
+        src: 'https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.20/jquery.fancybox.min.css',
+        integrity: 'sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY='
+      }]
     }
   };
 
