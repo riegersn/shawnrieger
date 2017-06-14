@@ -154,46 +154,48 @@ $(function(){
 
   // PHOTOGRAPHY GRID START ---------------------------------------------------
   var $msnry = $('.photo-group');
-  var $photos = photoBin.getPhotos(); // eslint-disable-line
-
-  $msnry.append($photos);
-
-  $photos.imagesLoaded().always( function() {
-    $msnry.masonry({
-      itemSelector: '.grid-item',
-      columnWidth: '.grid-sizer',
-      percentPosition: true
-    });
-    shawnRieger.sections.loc = getSectionOffsets();
-  });
-
-  // load more images button
-  $('.load-photos').click(function(){
-    var scrollOnce = false;
-    var $photos = photoBin.getPhotos().hide(); // eslint-disable-line
+  if ($msnry.length) {
+    var $photos = photoBin.getPhotos(); // eslint-disable-line
 
     $msnry.append($photos);
 
-    $photos.imagesLoaded().progress( function( imgLoad, image ) {
-      var $item = $(image.img).parents('.grid-item');
-
-      $item.show();
-      $msnry.masonry( 'appended', $item );
-
-      // we've added elements to the page, time to update our section locations
+    $photos.imagesLoaded().always( function() {
+      $msnry.masonry({
+        itemSelector: '.grid-item',
+        columnWidth: '.grid-sizer',
+        percentPosition: true
+      });
       shawnRieger.sections.loc = getSectionOffsets();
-
-      // scroll to the first new photo we load, no more
-      if (!scrollOnce) {
-        scrollOnce = true;
-        scrollToObject($item, 75);
-      }
     });
 
-    // hide the button if we have no more images left
-    if (photoBin.photos.length < 1) // eslint-disable-line
-      $(this).fadeOut();
-  });
+    // load more images button
+    $('.load-photos').click(function(){
+      var scrollOnce = false;
+      var $photos = photoBin.getPhotos().hide(); // eslint-disable-line
+
+      $msnry.append($photos);
+
+      $photos.imagesLoaded().progress( function( imgLoad, image ) {
+        var $item = $(image.img).parents('.grid-item');
+
+        $item.show();
+        $msnry.masonry( 'appended', $item );
+
+        // we've added elements to the page, time to update our section locations
+        shawnRieger.sections.loc = getSectionOffsets();
+
+        // scroll to the first new photo we load, no more
+        if (!scrollOnce) {
+          scrollOnce = true;
+          scrollToObject($item, 75);
+        }
+      });
+
+      // hide the button if we have no more images left
+      if (photoBin.photos.length < 1) // eslint-disable-line
+        $(this).fadeOut();
+    });
+  }
   // --------------------------------------------------------- END MASONRY GRID
 
 });
