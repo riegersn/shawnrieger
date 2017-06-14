@@ -22,12 +22,16 @@
   // get proj title, splash & create screenshot array
   $splash  = '/img/portfolio/' . $portfolio->id . '/' . $portfolio->id . '_splash.jpg';
   $screens = array();
+  $thumbs = array();
 
   // scan proj img dir for files
   $files = scandir('../../img/portfolio/' . $portfolio->id);
   foreach ($files as $file) {
-    if ( strpos($file, '_screen_') !== false )
+    if ( strpos($file, '_thumb.') !== false ) {
+      $thumbs[] = $file;
+    } elseif ( strpos($file, '_screen_') !== false ) {
       $screens[] = $file;
+    }
   }
 
   // set the page title
@@ -103,7 +107,7 @@
             <?php foreach ($screens as $index => $filename) { ?>
               <div class="col-xs-12 col-sm-6 col-md-4">
                 <a class="thumbnail<?php if ($portfolio->nsfw) echo ' nsfw' ?>" href="/img/portfolio/<?=$portfolio->id?>/<?=$filename?>" data-fancybox="<?=$portfolio->id?>">
-                    <img src="/img/portfolio/<?=$portfolio->id?>/<?=$filename?>">
+                    <img src="/img/portfolio/<?=$portfolio->id?>/<?=$thumbs[$index]?>">
                 </a>
               </div>
             <?php } ?>
