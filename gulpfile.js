@@ -18,10 +18,10 @@ var gulp        = require('gulp'),
 // JAVASCRIPT (UGLIFY)
 gulp.task('js', function() {
   gulp.src(['./js/photos.js', './js/main.js', '!js/*.min.js'], {base:'js/'})
+    .pipe(concat('main.min.js'))
     .pipe(sourcemaps.init())
     .pipe(uglify())
-    .pipe(sourcemaps.write())
-    .pipe(concat('main.min.js'))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('js'));
 });
 
@@ -31,7 +31,7 @@ gulp.task('sass', function () {
     .pipe(sourcemaps.init())
     .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
     //.pipe(autoprefix({browsers: ['last 2 versions']}))
-    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('style'));
 });
 
