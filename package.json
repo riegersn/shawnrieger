@@ -2,7 +2,7 @@
   "name": "shawnrieger",
   "version": "1.0.0",
   "description": "My personal website",
-  "main": "index.html",
+  "main": "index.php",
   "repository": "https://github.com/riegersn/shawnrieger",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
